@@ -109,6 +109,7 @@ class Passagem():
         self.__estado = " nulo "
         self.__preco = 0.0
         self.__dataCompra = "sem data de compra"
+        self.__cod = "000000"
 
     def setOrigem(self, origem):
         self.__origem = origem
@@ -134,6 +135,9 @@ class Passagem():
     def setDataCompra(self, dataCompra):
         self.__dataCompra = dataCompra
 
+    def setCod(self, cod):
+        self.__cod = cod
+
     def getOrigem(self):
         return self.__origem
 
@@ -157,3 +161,6 @@ class Passagem():
 
     def getDataCompra(self):
         return self.__dataCompra
+
+    def getCod(self):
+        return self.__cod

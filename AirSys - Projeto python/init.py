@@ -1,6 +1,16 @@
-from entidades import Passagem
+import controles
 
-x = Passagem()
+x = controles.Funcionario()
+lx = controles.ListaFuncionarios()
 
-print(x.setAssento("3b"))
-print(x.getAssento())
+x.setNome("joao")
+
+print(x.getNome())
+print(x.getEmail())
+
+lx.buscarFuncionario(x)
+
+lx.registrarFuncionario(x)
+lx.buscarFuncionario(x)
+
+lx.removerFuncionario(x)
