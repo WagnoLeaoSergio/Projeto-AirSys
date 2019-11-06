@@ -1,7 +1,6 @@
-# Projeto-AirSys
+Projeto final da disciplina de Modelagem de Sistemas turma 2019-3
 
-Projeto final da disciplina de Modelagem de Sistemas turma 2019-3.
-
+[![Version 3.0](https://img.shields.io/badge/version-0.0.1-brightgreen.svg?style=for-the-badge)]
 
  # Sobre o projeto
 
@@ -9,7 +8,7 @@ Projeto final da disciplina de Modelagem de Sistemas turma 2019-3.
 
 - Dentro da branch master terão três diretórios:
 
-1. AirSys - Projeto python: código-fonte em python do sistema.
+1. AirSys - Projeto python: código-fonte em python3 do sistema.
 
 2. AirSys - Executável: Projeto compilado como executável para windows.
 
@@ -22,5 +21,7 @@ Projeto final da disciplina de Modelagem de Sistemas turma 2019-3.
 ## Módulos
 
 - PyMongo
+> python3 -m pip install pymongo[tls]
 
 - Python EasyGUI
+> pip install easygui
