@@ -17,4 +17,4 @@ Projeto final da disciplina de Modelagem de Sistemas turma 2019-3.
 
 - PyMongo
 
-`python3 -m pip install pymongo[tls]`
+`sudo python3 -m pip install pymongo[srv]`
