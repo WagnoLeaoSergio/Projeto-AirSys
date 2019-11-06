@@ -1,6 +1,6 @@
-from entidades import Cliente
+from entidades import Passagem
 
-x = Cliente()
+x = Passagem()
 
-print(x.getBanco())
-print(x.getNome())
+print(x.setAssento("3b"))
+print(x.getAssento())

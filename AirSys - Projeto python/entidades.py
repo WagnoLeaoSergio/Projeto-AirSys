@@ -2,6 +2,7 @@ import sys
 
 
 class Pessoa(object):
+    """docstring for Pessoa"""
     def __init__(self):
         self.__nome = "sem nome"
         self.__numIdentidade = "sem numero de indentidade"
@@ -34,6 +35,7 @@ class Pessoa(object):
 
 
 class Gerente(Pessoa):
+    """docstring for Gerente"""
     def __init__(self):
         Pessoa.__init__(self)
         self.__turno = "sem turno"
@@ -50,13 +52,15 @@ class Gerente(Pessoa):
 
 
 class Funcionario(Pessoa):
+    """docstring for Funcionario"""
+
     def __init__(self):
         Pessoa.__init__(self)
         self.__numDeVendas = 0
         self.__codigo = 0
 
     def setNumDeVendas(self, numvendas):
-        if numvendas <= 0:
+        if numvendas < 0:
             print("ERRO! NUMERO INVALIDO")
             sys.exit(0)
         else:
@@ -91,3 +95,65 @@ class Cliente(Pessoa):
 
     def getKey(self):
         return self.__key
+
+
+class Passagem():
+    """docstring for Passagem"""
+
+    def __init__(self):
+        self.__origem = "sem origem"
+        self.__destino = "sem destino"
+        self.__data = "sem data"
+        self.__companhia = "sem companhia"
+        self.__assento = "assento nao selecionado"
+        self.__estado = " nulo "
+        self.__preco = 0.0
+        self.__dataCompra = "sem data de compra"
+
+    def setOrigem(self, origem):
+        self.__origem = origem
+
+    def setDestino(self, destino):
+        self.__destino = destino
+
+    def setData(self, data):
+        self.__data = data
+
+    def setCompanhia(self, companhia):
+        self.__companhia = companhia
+
+    def setAssento(self, assento):
+        self.__assento = assento
+
+    def setEstado(self, estado):
+        self.__estado = estado
+
+    def setPreco(self, preco):
+        self.__preco = preco
+
+    def setDataCompra(self, dataCompra):
+        self.__dataCompra = dataCompra
+
+    def getOrigem(self):
+        return self.__origem
+
+    def getDestino(self):
+        return self.__destino
+
+    def getData(self):
+        return self.__data
+
+    def getCompanhia(self):
+        return self.__companhia
+
+    def getAssento(self):
+        return self.__assento
+
+    def getEstado(self):
+        return self.__estado
+
+    def getPreco(self):
+        return self.__preco
+
+    def getDataCompra(self):
+        return self.__dataCompra
