@@ -8,9 +8,12 @@ x.setNome("joao")
 print(x.getNome())
 print(x.getEmail())
 
-lx.buscarFuncionario(x)
+#lx.buscarFuncionario(x)
 
 lx.registrarFuncionario(x)
-lx.buscarFuncionario(x)
 
-lx.removerFuncionario(x)
+lx.registrarFuncionario(x)
+
+#lx.buscarFuncionario(x)
+
+#lx.removerFuncionario(x)ss

@@ -1,10 +1,14 @@
 import sys
+import pymongo
+from configuracoes import getMongoDbURL
 from entidades import Gerente, Funcionario, Cliente, Passagem
 
 
 """ Os métodos destas classes deverão se conectar com o banco de dados,
 não apenas gerenciar as listas"""
 
+dbURI = getMongoDbURL()
+mainDB = pymongo.MongoClient(dbURI)
 
 class ListaGerentes:
     """ docstring for ListaGerentes """
@@ -41,14 +45,83 @@ class ListaFuncionarios:
 
     def __init__(self):
         self.__funcionarios = []
+        self.dbFuncionarios = mainDB.airsys.funcionarios
 
     def registrarFuncionario(self, funcionario):
+
+        checkFuncionario = self.dbFuncionarios.find_one(
+            {'nome': funcionario.getNome()}
+        )
+
         if funcionario in self.__funcionarios:
-            print("Funcionario ja incluido na lista")
-            return 0
+
+            if checkFuncionario is not None:
+                print("Funcionario ja registrado")
+                return 0
+
+            else:
+
+                newFuncionario = {
+                    'codigo': funcionario.getCodigo(),
+                    'nome': funcionario.getNome(),
+                    'numIdentidade': funcionario.getNumIdentidade(),
+                    'cpf': funcionario.getCPF(),
+                    'email': funcionario.getEmail(),
+                    'numeroDeVendas': funcionario.getNumDeVendas()
+                }
+
+                self.dbFuncionarios.insert_one(newFuncionario)
+                print("Funcionario ja registrado")
+
         else:
-            self.__funcionarios.append(funcionario)
-            print("Funcionario {0} registrado!".format(funcionario.getNome()))
+
+            if checkFuncionario is not None:
+                newFuncionario = Funcionario()
+
+                newFuncionario.setNome(
+                    checkFuncionario['nome']
+                )
+
+                newFuncionario.setNumIdetidade(
+                    checkFuncionario['numIdentidade']
+                )
+
+                newFuncionario.setCPF(
+                    checkFuncionario['cpf']
+                )
+
+                newFuncionario.setCodigo(
+                    checkFuncionario['codigo']
+                )
+
+                newFuncionario.setEmail(
+                    checkFuncionario['email']
+                )
+
+                newFuncionario.setNumDeVendas(
+                    checkFuncionario['numeroDeVendas']
+                )
+
+                self.__funcionarios.append(newFuncionario)
+                print("Funcionario ja registrado")
+
+            else:
+                self.__funcionarios.append(funcionario)
+
+                newDBFuncionario = {
+                    'codigo': funcionario.getCodigo(),
+                    'nome': funcionario.getNome(),
+                    'numIdentidade': funcionario.getNumIdentidade(),
+                    'cpf': funcionario.getCPF(),
+                    'email': funcionario.getEmail(),
+                    'numeroDeVendas': funcionario.getNumDeVendas()
+                }
+
+                self.dbFuncionarios.insert_one(newDBFuncionario)
+                print("Funcionario {0} registrado!".format(
+                    funcionario.getNome()
+                )
+                )
 
     def removerFuncionario(self, funcionario):
         if funcionario not in self.__funcionarios:

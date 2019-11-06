@@ -43,7 +43,7 @@ class Gerente(Pessoa):
     def setTurno(self, turno):
         if turno != "manha" and turno != "tarde" and turno != "noite":
             print("ERRO! turno nao reconhecido")
-            sys.exit(0)
+            return
         else:
             self.__turno = turno
 
@@ -62,7 +62,7 @@ class Funcionario(Pessoa):
     def setNumDeVendas(self, numvendas):
         if numvendas < 0:
             print("ERRO! NUMERO INVALIDO")
-            sys.exit(0)
+            return
         else:
             self.__numDeVendas = numvendas
 
