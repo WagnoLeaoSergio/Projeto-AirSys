@@ -1,22 +1,38 @@
 import controles
 
-x = controles.Funcionario()
-lx = controles.ListaFuncionarios()
+x = controles.Gerente()
+lx = controles.ListaGerentes()
 
 x.setNome("joao")
 
 print(x.getNome())
-print(x.getEmail())
+print(x.getTurno())
 
-y = lx.buscarFuncionario(x)
-print (y)
+# y = lx.buscarFuncionario(x)
 
-print(lx.registrarFuncionario(x))
+# print(lx.registrarGerente(x))
 
-#y = lx.buscarFuncionario(x)
-print (y)
-
-print(lx.removerFuncionario(x))
+print(lx.removerGerente(x))
 
 
-#lx.removerFuncionario(x)ss
+# lx.removerFuncionario(x)
+
+"""
+
+y = controles.Cliente()
+ly = controles.ListaClientes()
+
+y.setNome("lisa")
+
+print(y.getNome())
+print(y.getBanco())
+
+z = ly.registrarCliente(y)
+
+print(z)
+
+z = ly.registrarCliente(y)
+
+print(z)
+
+"""

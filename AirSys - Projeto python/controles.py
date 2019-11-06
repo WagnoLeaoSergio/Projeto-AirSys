@@ -11,27 +11,95 @@ dbURI = getMongoDbURL()
 mainDB = pymongo.MongoClient(dbURI)
 
 
+class InterfaceListaEntidade:
+    def registrarEntidade(nomeEntidade, listaEntidades,
+                          dbEntidades, objEntidade, dictNewEntidade):
+
+        checkEntidade = dbEntidades.find_one(
+            {'nome': objEntidade.getNome()}
+        )
+
+        if objEntidade in listaEntidades:
+            if checkEntidade is None:
+                dbEntidades.insert_one(dictNewEntidade)
+            return "{0} {1} ja registrado(a)".format(
+                nomeEntidade, objEntidade.getNome()
+            )
+        else:
+            if checkEntidade is not None:
+                return "{0} {1} ja registrado(a)!".format(
+                    nomeEntidade, objEntidade.getNome()
+                )
+            else:
+                listaEntidades.append(objEntidade)
+                dbEntidades.insert_one(dictNewEntidade)
+                return "{0} {1} registrado(a)!".format(
+                    nomeEntidade, objEntidade.getNome()
+                )
+
+    def removerEntidade(nomeEntidade, listaEntidades,
+                        dbEntidades, objEntidade):
+
+        checkEntidade = dbEntidades.find_one(
+            {'nome': objEntidade.getNome()}
+        )
+
+        if objEntidade in listaEntidades:
+            if checkEntidade is not None:
+                dbEntidades.delete_one(
+                    {'nome': objEntidade.getNome()}
+                )
+            listaEntidades.remove(objEntidade)
+            return "{0} {1} removido(a)!".format(
+                nomeEntidade, objEntidade.getNome()
+            )
+        else:
+            if checkEntidade is not None:
+                dbEntidades.delete_one(
+                    {'nome': objEntidade.getNome()}
+                )
+                return "{0} {1} removido(a)!".format(
+                    nomeEntidade, objEntidade.getNome()
+                )
+            return "{0} {1} nao encontrado(a)".format(
+                nomeEntidade, objEntidade.getNome())
+
+
 class ListaGerentes:
     """ docstring for ListaGerentes """
 
     def __init__(self):
         self.__gerentes = []
+        self.dbGerentes = mainDB.airsys.gerentes
 
     def registrarGerente(self, gerente):
-        if gerente in self.__gerentes:
-            print("Gerente ja incluido na lista")
-            return 0
-        else:
-            self.__gerentes.append(gerente)
-            print("Gerente {0} registrado!".format(gerente.getNome()))
+        newGerente = {
+            'nome': gerente.getNome(),
+            'numIdentidade': gerente.getNumIdentidade(),
+            'cpf': gerente.getCPF(),
+            'email': gerente.getEmail(),
+            'turno': gerente.getTurno()
+        }
+        result = InterfaceListaEntidade.registrarEntidade(
+            nomeEntidade="Gerente",
+            listaEntidades=self.__gerentes,
+            dbEntidades=self.dbGerentes,
+            objEntidade=gerente,
+            dictNewEntidade=newGerente
+        )
+
+        return result
 
     def removerGerente(self, gerente):
-        if gerente not in self.__gerentes:
-            print("Gerente não encotrado na lista")
-            return 0
-        else:
-            self.__gerentes.remove(gerente)
-            print("Gerente {0} removido!".format(gerente.getNome()))
+
+        result = InterfaceListaEntidade.removerEntidade(
+            nomeEntidade="Gerente",
+            listaEntidades=self.__gerentes,
+            dbEntidades=self.dbGerentes,
+            objEntidade=gerente
+        )
+
+        return result
 
     def buscarGerente(self, gerente):
         if gerente in self.__gerentes:
@@ -49,77 +117,23 @@ class ListaFuncionarios:
         self.dbFuncionarios = mainDB.airsys.funcionarios
 
     def registrarFuncionario(self, funcionario):
-
-        checkFuncionario = self.dbFuncionarios.find_one(
-            {'nome': funcionario.getNome()}
+        newFuncionario = {
+            'codigo': funcionario.getCodigo(),
+            'nome': funcionario.getNome(),
+            'numIdentidade': funcionario.getNumIdentidade(),
+            'cpf': funcionario.getCPF(),
+            'email': funcionario.getEmail(),
+            'numeroDeVendas': funcionario.getNumDeVendas()
+        }
+        result = InterfaceListaEntidade.registrarEntidade(
+            nomeEntidade="Funcionario",
+            listaEntidades=self.__funcionarios,
+            dbEntidades=self.dbFuncionarios,
+            objEntidade=funcionario,
+            dictNewEntidade=newFuncionario
         )
 
-        if funcionario in self.__funcionarios:
-
-            if checkFuncionario is not None:
-                return "Funcionario ja registrado"
-
-            else:
-
-                newFuncionario = {
-                    'codigo': funcionario.getCodigo(),
-                    'nome': funcionario.getNome(),
-                    'numIdentidade': funcionario.getNumIdentidade(),
-                    'cpf': funcionario.getCPF(),
-                    'email': funcionario.getEmail(),
-                    'numeroDeVendas': funcionario.getNumDeVendas()
-                }
-
-                self.dbFuncionarios.insert_one(newFuncionario)
-                return "Funcionario ja registrado"
-
-        else:
-
-            if checkFuncionario is not None:
-                newFuncionario = Funcionario()
-
-                newFuncionario.setNome(
-                    checkFuncionario['nome']
-                )
-
-                newFuncionario.setNumIdetidade(
-                    checkFuncionario['numIdentidade']
-                )
-
-                newFuncionario.setCPF(
-                    checkFuncionario['cpf']
-                )
-
-                newFuncionario.setCodigo(
-                    checkFuncionario['codigo']
-                )
-
-                newFuncionario.setEmail(
-                    checkFuncionario['email']
-                )
-
-                newFuncionario.setNumDeVendas(
-                    checkFuncionario['numeroDeVendas']
-                )
-
-                self.__funcionarios.append(newFuncionario)
-                return "Funcionario ja registrado"
-
-            else:
-                self.__funcionarios.append(funcionario)
-
-                newDBFuncionario = {
-                    'codigo': funcionario.getCodigo(),
-                    'nome': funcionario.getNome(),
-                    'numIdentidade': funcionario.getNumIdentidade(),
-                    'cpf': funcionario.getCPF(),
-                    'email': funcionario.getEmail(),
-                    'numeroDeVendas': funcionario.getNumDeVendas()
-                }
-
-                self.dbFuncionarios.insert_one(newDBFuncionario)
-                return "Funcionario {0} registrado!".format(
-                    funcionario.getNome())
+        return result
 
     def removerFuncionario(self, funcionario):
         checkFuncionario = self.dbFuncionarios.find_one(
@@ -221,76 +235,25 @@ class ListaClientes:
         self.dbClientes = mainDB.airsys.clientes
 
     def registrarCliente(self, cliente):
-        checkClientes = self.dbClientes.find_one(
-            {'nome': cliente.getNome()}
+
+        newCliente = {
+            'key': cliente.getKey(),
+            'nome': cliente.getNome(),
+            'numIdentidade': cliente.getNumIdentidade(),
+            'cpf': cliente.getCPF(),
+            'email': cliente.getEmail(),
+            'banco': cliente.getBanco()
+        }
+
+        result = InterfaceListaEntidade.registrarEntidade(
+            nomeEntidade="Cliente",
+            listaEntidades=self.__clientes,
+            dbEntidades=self.dbClientes,
+            objEntidade=cliente,
+            dictNewEntidade=newCliente
         )
 
-        if cliente in self.__clientes:
-
-            if checkCliente is not None:
-                return "cliente ja registrado"
-
-            else:
-
-                newCliente = {
-                    'codigo': cliente.getCodigo(),
-                    'nome': cliente.getNome(),
-                    'numIdentidade': cliente.getNumIdentidade(),
-                    'cpf': cliente.getCPF(),
-                    'email': cliente.getEmail(),
-                    'numeroDeVendas': cliente.getNumDeVendas()
-                }
-
-                self.dbClientes.insert_one(newCliente)
-                return "Cliente ja registrado"
-
-        else:
-
-            if checkCliente is not None:
-                newCliente = Cliente()
-
-                newCliente.setNome(
-                    checkFCliente['nome']
-                )
-
-                newCliente.setNumIdetidade(
-                    checkFuncionario['numIdentidade']
-                )
-
-                newFuncionario.setCPF(
-                    checkFuncionario['cpf']
-                )
-
-                newFuncionario.setCodigo(
-                    checkFuncionario['codigo']
-                )
-
-                newFuncionario.setEmail(
-                    checkFuncionario['email']
-                )
-
-                newFuncionario.setNumDeVendas(
-                    checkFuncionario['numeroDeVendas']
-                )
-
-                self.__funcionarios.append(newFuncionario)
-                return "Funcionario ja registrado"
-
-            else:
-                self.__funcionarios.append(funcionario)
-
-                newDBFuncionario = {
-                    'codigo': funcionario.getCodigo(),
-                    'nome': funcionario.getNome(),
-                    'numIdentidade': funcionario.getNumIdentidade(),
-                    'cpf': funcionario.getCPF(),
-                    'email': funcionario.getEmail(),
-                    'numeroDeVendas': funcionario.getNumDeVendas()
-                }
-
-                self.dbFuncionarios.insert_one(newDBFuncionario)
-                return "Funcionario {0} registrado!".format(
-                    funcionario.getNome())
+        return result
 
     def removerCliente(self, cliente):
         if cliente not in self.__clientes:
