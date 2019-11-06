@@ -1,6 +1,6 @@
 Projeto final da disciplina de Modelagem de Sistemas turma 2019-3
 
-![Version 3.0](https://img.shields.io/badge/version-0.1.0-brightgreen.svg?style=for-the-badge)
+![Version 0.1](https://img.shields.io/badge/version-0.1.0-brightgreen.svg?style=for-the-badge)
 
  # Sobre o projeto
 
@@ -18,10 +18,10 @@ Projeto final da disciplina de Modelagem de Sistemas turma 2019-3
 
 - Python3
 
-> #### Módulos
+- #### Módulos
 
->- PyMongo
-> python3 -m pip install pymongo[tls]
+> PyMongo
+>> python3 -m pip install pymongo[tls]
 
->- Python EasyGUI
-> pip install easygui
+> Python EasyGUI
+>> pip install easygui
