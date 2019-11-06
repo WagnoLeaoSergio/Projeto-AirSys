@@ -1,4 +1,4 @@
-Projeto final da disciplina de Modelagem de Sistemas turma 2019-3
+Projeto final da disciplina de Modelagem de Sistemas turma 2019-3.
 
 ![Version 0.1](https://img.shields.io/badge/version-0.1.0-brightgreen.svg?style=for-the-badge)
 
@@ -16,4 +16,5 @@ Projeto final da disciplina de Modelagem de Sistemas turma 2019-3
 - Python3
 
 - PyMongo
-> python3 -m pip install pymongo[tls]
+
+`python3 -m pip install pymongo[tls]`
