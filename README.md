@@ -18,10 +18,10 @@ Projeto final da disciplina de Modelagem de Sistemas turma 2019-3
 
 - Python3
 
-## Módulos
+> #### Módulos
 
-- PyMongo
+>- PyMongo
 > python3 -m pip install pymongo[tls]
 
-- Python EasyGUI
+>- Python EasyGUI
 > pip install easygui
