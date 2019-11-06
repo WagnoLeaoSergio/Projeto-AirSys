@@ -7,21 +7,13 @@ Projeto final da disciplina de Modelagem de Sistemas turma 2019-3
 - O projeto tem como objetivo criar um sistema de gerenciameto de passagens aéreas para um aeroporto.
 
 - Dentro da branch master terão três diretórios:
+  1. AirSys - Projeto python: código-fonte em python3 do sistema.
+  2. AirSys - Executável: Projeto compilado como executável para windows.
+  3. AirSys - Executável arquivo único: Projeto compilado com um único arquivo executável para windows.
 
-1. AirSys - Projeto python: código-fonte em python3 do sistema.
-
-2. AirSys - Executável: Projeto compilado como executável para windows.
-
-3. AirSys - Executável arquivo único: Projeto compilado com um único arquivo executável para windows.
-
-# Pré requisitos
+# Pré requisitos (para executar o código-fonte)
 
 - Python3
 
-- #### Módulos
-
-> PyMongo
->> python3 -m pip install pymongo[tls]
-
-> Python EasyGUI
->> pip install easygui
+- PyMongo
+> python3 -m pip install pymongo[tls]
