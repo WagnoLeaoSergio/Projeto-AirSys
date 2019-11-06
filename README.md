@@ -1,6 +1,6 @@
 Projeto final da disciplina de Modelagem de Sistemas turma 2019-3
 
-[![Version 3.0](https://img.shields.io/badge/version-0.0.1-brightgreen.svg?style=for-the-badge)]
+![Version 3.0](https://img.shields.io/badge/version-0.0.1-brightgreen.svg?style=for-the-badge)
 
  # Sobre o projeto
 
