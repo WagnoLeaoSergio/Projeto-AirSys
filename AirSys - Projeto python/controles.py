@@ -10,6 +10,7 @@ não apenas gerenciar as listas"""
 dbURI = getMongoDbURL()
 mainDB = pymongo.MongoClient(dbURI)
 
+
 class ListaGerentes:
     """ docstring for ListaGerentes """
 
@@ -56,8 +57,7 @@ class ListaFuncionarios:
         if funcionario in self.__funcionarios:
 
             if checkFuncionario is not None:
-                print("Funcionario ja registrado")
-                return 0
+                return "Funcionario ja registrado"
 
             else:
 
@@ -71,7 +71,7 @@ class ListaFuncionarios:
                 }
 
                 self.dbFuncionarios.insert_one(newFuncionario)
-                print("Funcionario ja registrado")
+                return "Funcionario ja registrado"
 
         else:
 
@@ -103,7 +103,7 @@ class ListaFuncionarios:
                 )
 
                 self.__funcionarios.append(newFuncionario)
-                print("Funcionario ja registrado")
+                return "Funcionario ja registrado"
 
             else:
                 self.__funcionarios.append(funcionario)
@@ -118,25 +118,99 @@ class ListaFuncionarios:
                 }
 
                 self.dbFuncionarios.insert_one(newDBFuncionario)
-                print("Funcionario {0} registrado!".format(
-                    funcionario.getNome()
-                )
-                )
+                return "Funcionario {0} registrado!".format(
+                    funcionario.getNome())
 
     def removerFuncionario(self, funcionario):
-        if funcionario not in self.__funcionarios:
-            print("Funcionario não encotrado na lista")
-            return 0
-        else:
+        checkFuncionario = self.dbFuncionarios.find_one(
+            {'nome': funcionario.getNome()}
+        )
+
+        if funcionario in self.__funcionarios:
+
+            if checkFuncionario is not None:
+                self.dbFuncionarios.delete_one({'nome': funcionario.getNome()})
+                return "Funcionario {0} removido!".format(
+                    funcionario.getNome())
+
+            else:
+                self.__funcionarios.remove(funcionario)
+                return "Funcionario {0} removido!".format(
+                    funcionario.getNome())
+
             self.__funcionarios.remove(funcionario)
-            print("Funcionario {0} removido!".format(funcionario.getNome()))
+
+        else:
+
+            if checkFuncionario is not None:
+                self.dbFuncionarios.delete_one({'nome': funcionario.getNome()})
+                return "Funcionario {0} removido!".format(
+                    funcionario.getNome())
+
+            else:
+                return "Funcionario nao encontrado"
 
     def buscarFuncionario(self, funcionario):
+        checkFuncionario = self.dbFuncionarios.find_one(
+            {'nome': funcionario.getNome()}
+        )
+
         if funcionario in self.__funcionarios:
-            return self.__funcionarios[self.__funcionarios.index(funcionario)]
+
+            if checkFuncionario is not None:
+                return self.__funcionarios[
+                    self.__funcionarios.index(funcionario)
+                ]
+            else:
+
+                newFuncionario = {
+                    'codigo': funcionario.getCodigo(),
+                    'nome': funcionario.getNome(),
+                    'numIdentidade': funcionario.getNumIdentidade(),
+                    'cpf': funcionario.getCPF(),
+                    'email': funcionario.getEmail(),
+                    'numeroDeVendas': funcionario.getNumDeVendas()
+                }
+
+                self.dbFuncionarios.insert_one(newFuncionario)
+                return self.__funcionarios[
+                    self.__funcionarios.index(funcionario)
+                ]
+
         else:
-            print("Funcionario não encotrado na lista")
-            return 0
+
+            if checkFuncionario is not None:
+                newFuncionario = Funcionario()
+
+                newFuncionario.setNome(
+                    checkFuncionario['nome']
+                )
+
+                newFuncionario.setNumIdetidade(
+                    checkFuncionario['numIdentidade']
+                )
+
+                newFuncionario.setCPF(
+                    checkFuncionario['cpf']
+                )
+
+                newFuncionario.setCodigo(
+                    checkFuncionario['codigo']
+                )
+
+                newFuncionario.setEmail(
+                    checkFuncionario['email']
+                )
+
+                newFuncionario.setNumDeVendas(
+                    checkFuncionario['numeroDeVendas']
+                )
+
+                self.__funcionarios.append(newFuncionario)
+                return newFuncionario
+
+            else:
+                return "Funcionario nao encontrado"
 
 
 class ListaClientes:
@@ -144,14 +218,79 @@ class ListaClientes:
 
     def __init__(self):
         self.__clientes = []
+        self.dbClientes = mainDB.airsys.clientes
 
     def registrarCliente(self, cliente):
+        checkClientes = self.dbClientes.find_one(
+            {'nome': cliente.getNome()}
+        )
+
         if cliente in self.__clientes:
-            print("Cliente ja incluido na lista")
-            return 0
+
+            if checkCliente is not None:
+                return "cliente ja registrado"
+
+            else:
+
+                newCliente = {
+                    'codigo': cliente.getCodigo(),
+                    'nome': cliente.getNome(),
+                    'numIdentidade': cliente.getNumIdentidade(),
+                    'cpf': cliente.getCPF(),
+                    'email': cliente.getEmail(),
+                    'numeroDeVendas': cliente.getNumDeVendas()
+                }
+
+                self.dbClientes.insert_one(newCliente)
+                return "Cliente ja registrado"
+
         else:
-            self.__clientes.append(cliente)
-            print("Cliente {0} registrado!".format(cliente.getNome()))
+
+            if checkCliente is not None:
+                newCliente = Cliente()
+
+                newCliente.setNome(
+                    checkFCliente['nome']
+                )
+
+                newCliente.setNumIdetidade(
+                    checkFuncionario['numIdentidade']
+                )
+
+                newFuncionario.setCPF(
+                    checkFuncionario['cpf']
+                )
+
+                newFuncionario.setCodigo(
+                    checkFuncionario['codigo']
+                )
+
+                newFuncionario.setEmail(
+                    checkFuncionario['email']
+                )
+
+                newFuncionario.setNumDeVendas(
+                    checkFuncionario['numeroDeVendas']
+                )
+
+                self.__funcionarios.append(newFuncionario)
+                return "Funcionario ja registrado"
+
+            else:
+                self.__funcionarios.append(funcionario)
+
+                newDBFuncionario = {
+                    'codigo': funcionario.getCodigo(),
+                    'nome': funcionario.getNome(),
+                    'numIdentidade': funcionario.getNumIdentidade(),
+                    'cpf': funcionario.getCPF(),
+                    'email': funcionario.getEmail(),
+                    'numeroDeVendas': funcionario.getNumDeVendas()
+                }
+
+                self.dbFuncionarios.insert_one(newDBFuncionario)
+                return "Funcionario {0} registrado!".format(
+                    funcionario.getNome())
 
     def removerCliente(self, cliente):
         if cliente not in self.__clientes:
