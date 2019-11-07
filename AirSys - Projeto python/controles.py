@@ -7,11 +7,11 @@ mainDB = pymongo.MongoClient(dbURI)
 
 
 class InterfaceListaEntidade:
-    def _registrarEntidade(nomeEntidade, listaEntidades,
-                            dbEntidades, objEntidade, dictNewEntidade):
+    def _registrarEntidade(codigoEntidade, nomeEntidade, listaEntidades,
+                           dbEntidades, objEntidade, dictNewEntidade):
 
         checkEntidade = dbEntidades.find_one(
-            {'codigo': objEntidade.getCodigo()}
+            {'codigo': codigoEntidade}
         )
 
         if objEntidade in listaEntidades:
@@ -32,17 +32,17 @@ class InterfaceListaEntidade:
                     nomeEntidade, objEntidade.getCodigo()
                 )
 
-    def _removerEntidade(nomeEntidade, listaEntidades,
-                          dbEntidades, objEntidade):
+    def _removerEntidade(codigoEntidade, nomeEntidade, listaEntidades,
+                         dbEntidades, objEntidade):
 
         checkEntidade = dbEntidades.find_one(
-            {'codigo': objEntidade.getCodigo()}
+            {'codigo': codigoEntidade}
         )
 
         if objEntidade in listaEntidades:
             if checkEntidade is not None:
                 dbEntidades.delete_one(
-                    {'codigo': objEntidade.getCodigo()}
+                    {'codigo': codigoEntidade}
                 )
             listaEntidades.remove(objEntidade)
             return "{0} {1} removido(a)!".format(
@@ -51,7 +51,7 @@ class InterfaceListaEntidade:
         else:
             if checkEntidade is not None:
                 dbEntidades.delete_one(
-                    {'codigo': objEntidade.getCodigo()}
+                    {'codigo': codigoEntidade}
                 )
                 return "{0} {1} removido(a)!".format(
                     nomeEntidade, objEntidade.getCodigo()
@@ -59,11 +59,11 @@ class InterfaceListaEntidade:
             return "{0} {1} nao encontrado(a)".format(
                 nomeEntidade, objEntidade.getCodigo())
 
-    def _buscarEntidade(nomeEntidade, listaEntidades,
-                         dbEntidades, objEntidade):
+    def _buscarEntidade(codigoEntidade, nomeEntidade, listaEntidades,
+                        dbEntidades, objEntidade):
 
         checkEntidade = dbEntidades.find_one(
-            {'codigo': objEntidade.getCodigo()}
+            {'codigo': codigoEntidade}
         )
 
         if objEntidade in listaEntidades:
@@ -83,7 +83,7 @@ class ListaGerentes:
         self.__gerentes = []
         self.dbGerentes = mainDB.airsys.gerentes
 
-    def registrarGerente(self, gerente):
+    def registrarGerente(self, codigo, gerente=None):
         newGerente = {
             'codigo': gerente.getCodigo(),
             'nome': gerente.getNome(),
@@ -93,6 +93,7 @@ class ListaGerentes:
             'turno': gerente.getTurno()
         }
         result = InterfaceListaEntidade._registrarEntidade(
+            codigoEntidade=codigo,
             nomeEntidade="Gerente",
             listaEntidades=self.__gerentes,
             dbEntidades=self.dbGerentes,
@@ -102,9 +103,10 @@ class ListaGerentes:
 
         return result
 
-    def removerGerente(self, gerente):
+    def removerGerente(self, codigo, gerente=None):
 
         result = InterfaceListaEntidade._removerEntidade(
+            codigoEntidade=codigo,
             nomeEntidade="Gerente",
             listaEntidades=self.__gerentes,
             dbEntidades=self.dbGerentes,
@@ -113,9 +115,10 @@ class ListaGerentes:
 
         return result
 
-    def buscarGerente(self, gerente):
+    def buscarGerente(self, codigo, gerente=None):
 
         result = InterfaceListaEntidade._buscarEntidade(
+            codigoEntidade=codigo,
             nomeEntidade="Gerente",
             listaEntidades=self.__gerentes,
             dbEntidades=self.dbGerentes,
@@ -132,7 +135,7 @@ class ListaFuncionarios:
         self.__funcionarios = []
         self.dbFuncionarios = mainDB.airsys.funcionarios
 
-    def registrarFuncionario(self, funcionario):
+    def registrarFuncionario(self, codigo, funcionario=None):
         newFuncionario = {
             'codigo': funcionario.getCodigo(),
             'nome': funcionario.getNome(),
@@ -142,6 +145,7 @@ class ListaFuncionarios:
             'numeroDeVendas': funcionario.getNumDeVendas()
         }
         result = InterfaceListaEntidade._registrarEntidade(
+            codigoEntidade=codigo,
             nomeEntidade="Funcionario",
             listaEntidades=self.__funcionarios,
             dbEntidades=self.dbFuncionarios,
@@ -151,8 +155,9 @@ class ListaFuncionarios:
 
         return result
 
-    def removerFuncionario(self, funcionario):
+    def removerFuncionario(self, codigo, funcionario=None):
         result = InterfaceListaEntidade._removerEntidade(
+            codigoEntidade=codigo,
             nomeEntidade="Funcionario",
             listaEntidades=self.__funcionarios,
             dbEntidades=self.dbFuncionarios,
@@ -161,8 +166,9 @@ class ListaFuncionarios:
 
         return result
 
-    def buscarFuncionario(self, funcionario):
+    def buscarFuncionario(self, codigo, funcionario=None):
         result = InterfaceListaEntidade._buscarEntidade(
+            codigoEntidade=codigo,
             nomeEntidade="Funcionario",
             listaEntidades=self.__funcionarios,
             dbEntidades=self.dbFuncionarios,
@@ -179,7 +185,7 @@ class ListaClientes:
         self.__clientes = []
         self.dbClientes = mainDB.airsys.clientes
 
-    def registrarCliente(self, cliente):
+    def registrarCliente(self, codigo, cliente=None):
 
         newCliente = {
             'codigo': cliente.getCodigo(),
@@ -191,6 +197,7 @@ class ListaClientes:
         }
 
         result = InterfaceListaEntidade._registrarEntidade(
+            codigoEntidade=codigo,
             nomeEntidade="Cliente",
             listaEntidades=self.__clientes,
             dbEntidades=self.dbClientes,
@@ -200,8 +207,9 @@ class ListaClientes:
 
         return result
 
-    def removerCliente(self, cliente):
+    def removerCliente(self, codigo, cliente=None):
         result = InterfaceListaEntidade._removerEntidade(
+            codigoEntidade=codigo,
             nomeEntidade="Cliente",
             listaEntidades=self.__clientes,
             dbEntidades=self.dbClientes,
@@ -210,8 +218,9 @@ class ListaClientes:
 
         return result
 
-    def buscarCliente(self, cliente):
+    def buscarCliente(self, codigo, cliente=None):
         result = InterfaceListaEntidade._buscarEntidade(
+            codigoEntidade=codigo,
             nomeEntidade="Cliente",
             listaEntidades=self.__clientes,
             dbEntidades=self.dbClientes,
@@ -228,7 +237,7 @@ class ListaPassagens:
         self.__passagens = []
         self.dbPassagens = mainDB.airsys.passagens
 
-    def registrarPassagem(self, passagem):
+    def registrarPassagem(self, codigo, passagem=None):
         newPassagem = {
             'codigo': passagem.getCodigo(),
             'origem': passagem.getOrigem(),
@@ -242,6 +251,7 @@ class ListaPassagens:
         }
 
         result = InterfaceListaEntidade._registrarEntidade(
+            codigoEntidade=codigo,
             nomeEntidade="Passagem",
             listaEntidades=self.__passagens,
             dbEntidades=self.dbPassagens,
@@ -251,8 +261,9 @@ class ListaPassagens:
 
         return result
 
-    def removerPassagem(self, passagem):
+    def removerPassagem(self, codigo, passagem=None):
         result = InterfaceListaEntidade._removerEntidade(
+            codigo=codigo,
             nomeEntidade="Passagem",
             listaEntidades=self.__passagens,
             dbEntidades=self.dbPassagens,
@@ -261,8 +272,9 @@ class ListaPassagens:
 
         return result
 
-    def buscarPassagem(self, passagem):
+    def buscarPassagem(self, codigo, passagem=None):
         result = InterfaceListaEntidade._buscarEntidade(
+            codigoEntidade=codigo,
             nomeEntidade="Passagem",
             listaEntidades=self.__passagens,
             dbEntidades=self.dbPassagens,
