@@ -1,68 +1,79 @@
-import sys
 import pymongo
 from configuracoes import getMongoDbURL
 from entidades import Gerente, Funcionario, Cliente, Passagem
-
-
-""" Os métodos destas classes deverão se conectar com o banco de dados,
-não apenas gerenciar as listas"""
 
 dbURI = getMongoDbURL()
 mainDB = pymongo.MongoClient(dbURI)
 
 
 class InterfaceListaEntidade:
-    def registrarEntidade(nomeEntidade, listaEntidades,
-                          dbEntidades, objEntidade, dictNewEntidade):
+    def _registrarEntidade(nomeEntidade, listaEntidades,
+                            dbEntidades, objEntidade, dictNewEntidade):
 
         checkEntidade = dbEntidades.find_one(
-            {'nome': objEntidade.getNome()}
+            {'codigo': objEntidade.getCodigo()}
         )
 
         if objEntidade in listaEntidades:
             if checkEntidade is None:
                 dbEntidades.insert_one(dictNewEntidade)
             return "{0} {1} ja registrado(a)".format(
-                nomeEntidade, objEntidade.getNome()
+                nomeEntidade, objEntidade.getCodigo()
             )
         else:
             if checkEntidade is not None:
                 return "{0} {1} ja registrado(a)!".format(
-                    nomeEntidade, objEntidade.getNome()
+                    nomeEntidade, objEntidade.getCodigo()
                 )
             else:
                 listaEntidades.append(objEntidade)
                 dbEntidades.insert_one(dictNewEntidade)
                 return "{0} {1} registrado(a)!".format(
-                    nomeEntidade, objEntidade.getNome()
+                    nomeEntidade, objEntidade.getCodigo()
                 )
 
-    def removerEntidade(nomeEntidade, listaEntidades,
-                        dbEntidades, objEntidade):
+    def _removerEntidade(nomeEntidade, listaEntidades,
+                          dbEntidades, objEntidade):
 
         checkEntidade = dbEntidades.find_one(
-            {'nome': objEntidade.getNome()}
+            {'codigo': objEntidade.getCodigo()}
         )
 
         if objEntidade in listaEntidades:
             if checkEntidade is not None:
                 dbEntidades.delete_one(
-                    {'nome': objEntidade.getNome()}
+                    {'codigo': objEntidade.getCodigo()}
                 )
             listaEntidades.remove(objEntidade)
             return "{0} {1} removido(a)!".format(
-                nomeEntidade, objEntidade.getNome()
+                nomeEntidade, objEntidade.getCodigo()
             )
         else:
             if checkEntidade is not None:
                 dbEntidades.delete_one(
-                    {'nome': objEntidade.getNome()}
+                    {'codigo': objEntidade.getCodigo()}
                 )
                 return "{0} {1} removido(a)!".format(
-                    nomeEntidade, objEntidade.getNome()
+                    nomeEntidade, objEntidade.getCodigo()
                 )
             return "{0} {1} nao encontrado(a)".format(
-                nomeEntidade, objEntidade.getNome())
+                nomeEntidade, objEntidade.getCodigo())
+
+    def _buscarEntidade(nomeEntidade, listaEntidades,
+                         dbEntidades, objEntidade):
+
+        checkEntidade = dbEntidades.find_one(
+            {'codigo': objEntidade.getCodigo()}
+        )
+
+        if objEntidade in listaEntidades:
+            return listaEntidades[listaEntidades.index(objEntidade)]
+        else:
+            if checkEntidade is not None:
+                listaEntidades.append(objEntidade)
+                return listaEntidades[listaEntidades.index(objEntidade)]
+            else:
+                return None
 
 
 class ListaGerentes:
@@ -74,13 +85,14 @@ class ListaGerentes:
 
     def registrarGerente(self, gerente):
         newGerente = {
+            'codigo': gerente.getCodigo(),
             'nome': gerente.getNome(),
             'numIdentidade': gerente.getNumIdentidade(),
             'cpf': gerente.getCPF(),
             'email': gerente.getEmail(),
             'turno': gerente.getTurno()
         }
-        result = InterfaceListaEntidade.registrarEntidade(
+        result = InterfaceListaEntidade._registrarEntidade(
             nomeEntidade="Gerente",
             listaEntidades=self.__gerentes,
             dbEntidades=self.dbGerentes,
@@ -92,7 +104,7 @@ class ListaGerentes:
 
     def removerGerente(self, gerente):
 
-        result = InterfaceListaEntidade.removerEntidade(
+        result = InterfaceListaEntidade._removerEntidade(
             nomeEntidade="Gerente",
             listaEntidades=self.__gerentes,
             dbEntidades=self.dbGerentes,
@@ -102,11 +114,15 @@ class ListaGerentes:
         return result
 
     def buscarGerente(self, gerente):
-        if gerente in self.__gerentes:
-            return self.__gerentes[self.__gerentes.index(gerente)]
-        else:
-            print("Gerente não encotrado na lista")
-            return 0
+
+        result = InterfaceListaEntidade._buscarEntidade(
+            nomeEntidade="Gerente",
+            listaEntidades=self.__gerentes,
+            dbEntidades=self.dbGerentes,
+            objEntidade=gerente
+        )
+
+        return result
 
 
 class ListaFuncionarios:
@@ -125,7 +141,7 @@ class ListaFuncionarios:
             'email': funcionario.getEmail(),
             'numeroDeVendas': funcionario.getNumDeVendas()
         }
-        result = InterfaceListaEntidade.registrarEntidade(
+        result = InterfaceListaEntidade._registrarEntidade(
             nomeEntidade="Funcionario",
             listaEntidades=self.__funcionarios,
             dbEntidades=self.dbFuncionarios,
@@ -136,95 +152,24 @@ class ListaFuncionarios:
         return result
 
     def removerFuncionario(self, funcionario):
-        checkFuncionario = self.dbFuncionarios.find_one(
-            {'nome': funcionario.getNome()}
+        result = InterfaceListaEntidade._removerEntidade(
+            nomeEntidade="Funcionario",
+            listaEntidades=self.__funcionarios,
+            dbEntidades=self.dbFuncionarios,
+            objEntidade=funcionario
         )
 
-        if funcionario in self.__funcionarios:
-
-            if checkFuncionario is not None:
-                self.dbFuncionarios.delete_one({'nome': funcionario.getNome()})
-                return "Funcionario {0} removido!".format(
-                    funcionario.getNome())
-
-            else:
-                self.__funcionarios.remove(funcionario)
-                return "Funcionario {0} removido!".format(
-                    funcionario.getNome())
-
-            self.__funcionarios.remove(funcionario)
-
-        else:
-
-            if checkFuncionario is not None:
-                self.dbFuncionarios.delete_one({'nome': funcionario.getNome()})
-                return "Funcionario {0} removido!".format(
-                    funcionario.getNome())
-
-            else:
-                return "Funcionario nao encontrado"
+        return result
 
     def buscarFuncionario(self, funcionario):
-        checkFuncionario = self.dbFuncionarios.find_one(
-            {'nome': funcionario.getNome()}
+        result = InterfaceListaEntidade._buscarEntidade(
+            nomeEntidade="Funcionario",
+            listaEntidades=self.__funcionarios,
+            dbEntidades=self.dbFuncionarios,
+            objEntidade=funcionario
         )
 
-        if funcionario in self.__funcionarios:
-
-            if checkFuncionario is not None:
-                return self.__funcionarios[
-                    self.__funcionarios.index(funcionario)
-                ]
-            else:
-
-                newFuncionario = {
-                    'codigo': funcionario.getCodigo(),
-                    'nome': funcionario.getNome(),
-                    'numIdentidade': funcionario.getNumIdentidade(),
-                    'cpf': funcionario.getCPF(),
-                    'email': funcionario.getEmail(),
-                    'numeroDeVendas': funcionario.getNumDeVendas()
-                }
-
-                self.dbFuncionarios.insert_one(newFuncionario)
-                return self.__funcionarios[
-                    self.__funcionarios.index(funcionario)
-                ]
-
-        else:
-
-            if checkFuncionario is not None:
-                newFuncionario = Funcionario()
-
-                newFuncionario.setNome(
-                    checkFuncionario['nome']
-                )
-
-                newFuncionario.setNumIdetidade(
-                    checkFuncionario['numIdentidade']
-                )
-
-                newFuncionario.setCPF(
-                    checkFuncionario['cpf']
-                )
-
-                newFuncionario.setCodigo(
-                    checkFuncionario['codigo']
-                )
-
-                newFuncionario.setEmail(
-                    checkFuncionario['email']
-                )
-
-                newFuncionario.setNumDeVendas(
-                    checkFuncionario['numeroDeVendas']
-                )
-
-                self.__funcionarios.append(newFuncionario)
-                return newFuncionario
-
-            else:
-                return "Funcionario nao encontrado"
+        return result
 
 
 class ListaClientes:
@@ -237,7 +182,7 @@ class ListaClientes:
     def registrarCliente(self, cliente):
 
         newCliente = {
-            'key': cliente.getKey(),
+            'codigo': cliente.getCodigo(),
             'nome': cliente.getNome(),
             'numIdentidade': cliente.getNumIdentidade(),
             'cpf': cliente.getCPF(),
@@ -245,7 +190,7 @@ class ListaClientes:
             'banco': cliente.getBanco()
         }
 
-        result = InterfaceListaEntidade.registrarEntidade(
+        result = InterfaceListaEntidade._registrarEntidade(
             nomeEntidade="Cliente",
             listaEntidades=self.__clientes,
             dbEntidades=self.dbClientes,
@@ -256,19 +201,24 @@ class ListaClientes:
         return result
 
     def removerCliente(self, cliente):
-        if cliente not in self.__clientes:
-            print("Cliente não encotrado na lista")
-            return 0
-        else:
-            self.__clientes.remove(cliente)
-            print("Cliente {0} removido!".format(cliente.getNome()))
+        result = InterfaceListaEntidade._removerEntidade(
+            nomeEntidade="Cliente",
+            listaEntidades=self.__clientes,
+            dbEntidades=self.dbClientes,
+            objEntidade=cliente
+        )
+
+        return result
 
     def buscarCliente(self, cliente):
-        if cliente in self.__clientes:
-            return self.__clientes[self.__clientes.index(cliente)]
-        else:
-            print("Cliente não encotrado na lista")
-            return 0
+        result = InterfaceListaEntidade._buscarEntidade(
+            nomeEntidade="Cliente",
+            listaEntidades=self.__clientes,
+            dbEntidades=self.dbClientes,
+            objEntidade=cliente
+        )
+
+        return result
 
 
 class ListaPassagens:
@@ -276,26 +226,47 @@ class ListaPassagens:
 
     def __init__(self):
         self.__passagens = []
+        self.dbPassagens = mainDB.airsys.passagens
 
     def registrarPassagem(self, passagem):
-        if passagem in self.__passagens:
-            print("Passagem ja incluida na lista")
-            return 0
-        else:
-            self.__passagens.append(passagem)
-            print("Passagem {0} registrada!".format(passagem.getCod()))
+        newPassagem = {
+            'codigo': passagem.getCodigo(),
+            'origem': passagem.getOrigem(),
+            'destino': passagem.getDestino(),
+            'data': passagem.getData(),
+            'companhia': passagem.getCompanhia(),
+            'assento': passagem.getAssento(),
+            'estado': passagem.getEstado(),
+            'preco': passagem.getPreco(),
+            'dataCompra': passagem.getDataCompra()
+        }
+
+        result = InterfaceListaEntidade._registrarEntidade(
+            nomeEntidade="Passagem",
+            listaEntidades=self.__passagens,
+            dbEntidades=self.dbPassagens,
+            objEntidade=passagem,
+            dictNewEntidade=newPassagem
+        )
+
+        return result
 
     def removerPassagem(self, passagem):
-        if passagem not in self.__passagens:
-            print("Passagem não encotrada na lista")
-            return 0
-        else:
-            self.__passagens.remove(passagem)
-            print("Passagem {0} removida!".format(passagem.getCod()))
+        result = InterfaceListaEntidade._removerEntidade(
+            nomeEntidade="Passagem",
+            listaEntidades=self.__passagens,
+            dbEntidades=self.dbPassagens,
+            objEntidade=passagem
+        )
+
+        return result
 
     def buscarPassagem(self, passagem):
-        if passagem in self.__passagens:
-            return self.__passagens[self.__passagens.index(passagem)]
-        else:
-            print("Passagem nao encontrada")
-            return 0
+        result = InterfaceListaEntidade._buscarEntidade(
+            nomeEntidade="Passagem",
+            listaEntidades=self.__passagens,
+            dbEntidades=self.dbPassagens,
+            objEntidade=passagem
+        )
+
+        return result

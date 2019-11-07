@@ -3,11 +3,16 @@ import sys
 
 class Pessoa(object):
     """docstring for Pessoa"""
+
     def __init__(self):
+        self.__codigo = "00000"
         self.__nome = "sem nome"
         self.__numIdentidade = "sem numero de indentidade"
         self.__cpf = None
         self.__email = "sem email"
+
+    def setCodigo(self, codigo):
+        self.__codigo = codigo
 
     def setNome(self, nome):
         self.__nome = nome
@@ -20,6 +25,9 @@ class Pessoa(object):
 
     def setEmail(self, email):
         self.__email = email
+
+    def getCodigo(self):
+        return self.__codigo
 
     def getNome(self):
         return self.__nome
@@ -36,6 +44,7 @@ class Pessoa(object):
 
 class Gerente(Pessoa):
     """docstring for Gerente"""
+
     def __init__(self):
         Pessoa.__init__(self)
         self.__turno = "sem turno"
@@ -57,7 +66,6 @@ class Funcionario(Pessoa):
     def __init__(self):
         Pessoa.__init__(self)
         self.__numDeVendas = 0
-        self.__codigo = 0
 
     def setNumDeVendas(self, numvendas):
         if numvendas < 0:
@@ -66,14 +74,8 @@ class Funcionario(Pessoa):
         else:
             self.__numDeVendas = numvendas
 
-    def setCodigo(self, codigo):
-        self.__codigo = codigo
-
     def getNumDeVendas(self):
         return self.__numDeVendas
-
-    def getCodigo(self):
-        return self.__codigo
 
 
 class Cliente(Pessoa):
@@ -82,25 +84,19 @@ class Cliente(Pessoa):
     def __init__(self):
         Pessoa.__init__(self)
         self.__banco = "sem banco"
-        self.__key = "0000"
 
     def setBanco(self, banco):
         self.__banco = banco
 
-    def setKey(self, key):
-        self.__key = key
-
     def getBanco(self):
         return self.__banco
-
-    def getKey(self):
-        return self.__key
 
 
 class Passagem():
     """docstring for Passagem"""
 
     def __init__(self):
+        self.__codigo = "00000"
         self.__origem = "sem origem"
         self.__destino = "sem destino"
         self.__data = "sem data"
@@ -109,7 +105,9 @@ class Passagem():
         self.__estado = " nulo "
         self.__preco = 0.0
         self.__dataCompra = "sem data de compra"
-        self.__cod = "000000"
+
+    def setCodigo(self, codigo):
+        self.__codigo = codigo
 
     def setOrigem(self, origem):
         self.__origem = origem
@@ -135,8 +133,8 @@ class Passagem():
     def setDataCompra(self, dataCompra):
         self.__dataCompra = dataCompra
 
-    def setCod(self, cod):
-        self.__cod = cod
+    def getCodigo(self):
+        return self.__codigo
 
     def getOrigem(self):
         return self.__origem
@@ -161,6 +159,3 @@ class Passagem():
 
     def getDataCompra(self):
         return self.__dataCompra
-
-    def getCod(self):
-        return self.__cod
