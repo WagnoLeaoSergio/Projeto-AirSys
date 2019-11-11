@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>425</width>
+    <height>504</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>169</horstretch>
+    <verstretch>20</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>425</width>
+    <height>504</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>425</width>
+    <height>504</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <weight>50</weight>
+    <bold>false</bold>
+   </font>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::NoFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>AirSys - Login</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#MainWindow
+{
+background-image: url(:/newPrefix/fundo.jpg);
+}
+
+#frame
+{
+background-color: rgba(46, 82, 102, 200);
+}
+
+#label_codigo
+{
+color: rgb(246, 238, 226);
+font: 75 14pt &quot;MathJax_SansSerif&quot;;
+}
+
+#CampoCodigo
+{
+color: rgb(211, 208, 203);
+background-color: #6E8898;
+}
+
+#label_senha
+{
+color: rgb(246, 238, 226);
+font: 75 14pt &quot;MathJax_SansSerif&quot;;
+}
+
+#CampoSenha
+{
+color: rgb(211, 208, 203);
+background-color: #6E8898;
+}
+
+#label
+{
+color: rgb(255, 255, 255);
+font: 75 15pt &quot;Noto Serif Khmer&quot;;
+}
+
+#BotaoLogar
+{
+color:#D3D0CB;
+background-color: rgb(66, 85, 99);
+border-radius:10px;
+}
+#BotaoLogar:hover
+{
+background-color: rgb(122, 168, 199);
+border-radius:10px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>15</x>
+      <y>30</y>
+      <width>391</width>
+      <height>451</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Noto Sans CJK TC Bold</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLineEdit" name="CampoCodigo">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>220</y>
+       <width>221</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+     <property name="cursorMoveStyle">
+      <enum>Qt::VisualMoveStyle</enum>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="CampoSenha">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>280</y>
+       <width>221</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="placeholderText">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="BotaoLogar">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>370</y>
+       <width>121</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Sans CJK TC</family>
+       <pointsize>14</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>ArrowCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Logar</string>
+     </property>
+     <property name="shortcut">
+      <string>Return</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>100</y>
+       <width>281</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Noto Serif Khmer</family>
+       <pointsize>15</pointsize>
+       <weight>9</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Entre com seu código e senha</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_codigo">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>190</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Codigo</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_senha">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>250</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Senha</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="recursos.qrc"/>
+ </resources>
+ <connections/>
+</ui>
