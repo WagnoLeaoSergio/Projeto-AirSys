@@ -10,6 +10,9 @@ class InterfaceListaEntidade:
     def _registrarEntidade(codigoEntidade, nomeEntidade, listaEntidades,
                            dbEntidades, objEntidade, dictNewEntidade):
 
+        if objEntidade is not None and codigoEntidade != objEntidade.getCodigo():
+            return "ERRO! Codigo recebido e codigo do objeto diferentes"
+
         checkEntidade = dbEntidades.find_one(
             {'codigo': codigoEntidade}
         )
@@ -34,6 +37,8 @@ class InterfaceListaEntidade:
 
     def _removerEntidade(codigoEntidade, nomeEntidade, listaEntidades,
                          dbEntidades, objEntidade):
+        if objEntidade is not None and codigoEntidade != objEntidade.getCodigo():
+            return "ERRO! Codigo recebido e codigo do objeto diferentes"
 
         checkEntidade = dbEntidades.find_one(
             {'codigo': codigoEntidade}
@@ -61,20 +66,80 @@ class InterfaceListaEntidade:
 
     def _buscarEntidade(codigoEntidade, nomeEntidade, listaEntidades,
                         dbEntidades, objEntidade):
+        if objEntidade is not None and codigoEntidade != objEntidade.getCodigo():
+            return "ERRO! Codigo recebido e codigo do objeto diferentes"
 
         checkEntidade = dbEntidades.find_one(
             {'codigo': codigoEntidade}
         )
 
-        if objEntidade in listaEntidades:
+        if objEntidade is not None and objEntidade in listaEntidades:
             return listaEntidades[listaEntidades.index(objEntidade)]
         else:
             if checkEntidade is not None:
-                listaEntidades.append(objEntidade)
-                return listaEntidades[listaEntidades.index(objEntidade)]
-            else:
-                return None
+                if nomeEntidade == "Gerente":
+                    newObjEntidade = Gerente()
+                    newObjEntidade.setCodigo(checkEntidade["codigo"])
+                    newObjEntidade.setNome(checkEntidade["nome"])
+                    newObjEntidade.setNumIdetidade(
+                        checkEntidade["numIdentidade"]
+                    )
+                    newObjEntidade.setCPF(checkEntidade["cpf"])
+                    newObjEntidade.setEmail(checkEntidade["email"])
+                    newObjEntidade.setTurno(checkEntidade["turno"])
+                    newObjEntidade.setSenha(checkEntidade["senha"])
+                elif nomeEntidade == "Funcionario":
+                    newObjEntidade = Funcionario()
+                    newObjEntidade.setCodigo(checkEntidade["codigo"])
+                    newObjEntidade.setNome(checkEntidade["nome"])
+                    newObjEntidade.setNumIdetidade(
+                        checkEntidade["numIdentidade"]
+                    )
+                    newObjEntidade.setCPF(checkEntidade["cpf"])
+                    newObjEntidade.setEmail(checkEntidade["email"])
+                    newObjEntidade.setNumDeVendas(
+                        checkEntidade["numeroDeVendas"]
+                    )
+                    newObjEntidade.setSenha(checkEntidade["senha"])
 
+                elif nomeEntidade == "Cliente":
+                    newObjEntidade = Cliente()
+                    newObjEntidade.setCodigo(checkEntidade["codigo"])
+                    newObjEntidade.setNome(checkEntidade["nome"])
+                    newObjEntidade.setNumIdetidade(
+                        checkEntidade["numIdentidade"]
+                    )
+                    newObjEntidade.setCPF(checkEntidade["cpf"])
+                    newObjEntidade.setEmail(checkEntidade["email"])
+                    newObjEntidade.setBanco(checkEntidade["banco"])
+                elif nomeEntidade == "Passagem":
+                    newObjEntidade = Passagem()
+                    newObjEntidade.setCodigo(checkEntidade["codigo"])
+                    newObjEntidade.setOrigem(checkEntidade["origem"])
+                    newObjEntidade.setDestino(checkEntidade["destino"])
+                    newObjEntidade.setCodigo(checkEntidade["codigo"])
+                    newObjEntidade.setData(checkEntidade["data"])
+                    newObjEntidade.setCompanhia(checkEntidade["companhia"])
+                    newObjEntidade.setAssento(checkEntidade["assento"])
+                    newObjEntidade.setEstado(checkEntidade["estado"])
+                    newObjEntidade.setPreco(checkEntidade["preco"])
+                    newObjEntidade.setDataCompra(checkEntidade["dataCompra"])
+
+                listaEntidades.append(newObjEntidade)
+                return listaEntidades[listaEntidades.index(newObjEntidade)]
+            else:
+                return "{0} {1} não encontrado".format(
+                    nomeEntidade, codigoEntidade
+                )
+
+    def _listarTodos(nomeEntidade, dbEntidades):
+        todos = []
+        i = 0
+        cursor = dbEntidades.find({})
+        for document in cursor:
+            todos.append({"element{0}".format(i): document})
+            i = i + 1
+        return todos
 
 class ListaGerentes:
     """ docstring for ListaGerentes """
@@ -90,7 +155,8 @@ class ListaGerentes:
             'numIdentidade': gerente.getNumIdentidade(),
             'cpf': gerente.getCPF(),
             'email': gerente.getEmail(),
-            'turno': gerente.getTurno()
+            'turno': gerente.getTurno(),
+            'senha': gerente.getSenha()
         }
         result = InterfaceListaEntidade._registrarEntidade(
             codigoEntidade=codigo,
@@ -104,7 +170,6 @@ class ListaGerentes:
         return result
 
     def removerGerente(self, codigo, gerente=None):
-
         result = InterfaceListaEntidade._removerEntidade(
             codigoEntidade=codigo,
             nomeEntidade="Gerente",
@@ -116,15 +181,20 @@ class ListaGerentes:
         return result
 
     def buscarGerente(self, codigo, gerente=None):
-
         result = InterfaceListaEntidade._buscarEntidade(
             codigoEntidade=codigo,
             nomeEntidade="Gerente",
             listaEntidades=self.__gerentes,
             dbEntidades=self.dbGerentes,
-            objEntidade=gerente
+            objEntidade=gerente,
         )
+        return result
 
+    def listarGerentes(self):
+        result = InterfaceListaEntidade._listarTodos(
+            nomeEntidade="Gerente",
+            dbEntidades=self.dbGerentes
+        )
         return result
 
 
@@ -142,7 +212,8 @@ class ListaFuncionarios:
             'numIdentidade': funcionario.getNumIdentidade(),
             'cpf': funcionario.getCPF(),
             'email': funcionario.getEmail(),
-            'numeroDeVendas': funcionario.getNumDeVendas()
+            'numeroDeVendas': funcionario.getNumDeVendas(),
+            'senha': funcionario.getSenha()
         }
         result = InterfaceListaEntidade._registrarEntidade(
             codigoEntidade=codigo,
@@ -175,6 +246,13 @@ class ListaFuncionarios:
             objEntidade=funcionario
         )
 
+        return result
+
+    def listarFuncionarios(self):
+        result = InterfaceListaEntidade._listarTodos(
+            nomeEntidade="Funcionario",
+            dbEntidades=self.dbFuncionarios
+        )
         return result
 
 
@@ -229,6 +307,13 @@ class ListaClientes:
 
         return result
 
+    def listarClientes(self):
+        result = InterfaceListaEntidade._listarTodos(
+            nomeEntidade="Cliente",
+            dbEntidades=self.dbClientes
+        )
+        return result
+
 
 class ListaPassagens:
     """ docstring for ListaPassagens """
@@ -281,4 +366,11 @@ class ListaPassagens:
             objEntidade=passagem
         )
 
+        return result
+
+    def listarPassagens(self):
+        result = InterfaceListaEntidade._listarTodos(
+            nomeEntidade="Passagem",
+            dbEntidades=self.dbPassagens
+        )
         return result

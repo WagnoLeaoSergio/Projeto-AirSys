@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>telaInserirPassagem</class>
+ <widget class="QMainWindow" name="telaInserirPassagem">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>407</width>
+    <height>538</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#telaInserirFuncionario
+{
+background-image: url(:/fundos/fundo3.jpg);
+}
+#frameDados
+{
+background-color: rgba(13, 125, 159, 80);
+}
+#labelInfo
+{
+font: 13pt &quot;Noto Serif Malayalam&quot;;
+color: rgb(243, 234, 225);
+}
+
+#campoCodigo
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#campoOrigem
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#campoDestino
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#campoData
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#campoCompanhia
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#campoAssento
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#campoPreco
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#botaoSubmeter
+{
+color: rgb(8, 76, 97);
+font: 12pt &quot;Noto Serif Malayalam&quot;;
+border-radius:5px;
+background-color: rgb(238, 219, 159);
+}
+#botaoSubmeter:hover
+{
+color: rgb(8, 76, 97);
+font: 12pt &quot;Noto Serif Malayalam&quot;;
+border-radius:5px;
+background-color: rgb(194, 178, 129);
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="frameDados">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>30</y>
+      <width>331</width>
+      <height>461</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>231</width>
+       <height>391</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLineEdit" name="campoCodigo">
+        <property name="placeholderText">
+         <string>CODIGO</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="campoOrigem">
+        <property name="placeholderText">
+         <string>ORIGEM</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="campoDestino">
+        <property name="placeholderText">
+         <string>DESTINO</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="campoData">
+        <property name="placeholderText">
+         <string>DATA</string>
+        </property>
+        <property name="cursorMoveStyle">
+         <enum>Qt::VisualMoveStyle</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="campoCompanhia">
+        <property name="placeholderText">
+         <string>COMPANHIA AÉREA</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="campoAssento">
+        <property name="placeholderText">
+         <string>ASSENTO</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="campoPreco">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="placeholderText">
+         <string>PREÇO</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QLabel" name="labelInfo">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>331</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="text">
+      <string>Insira aqui os dados da passagem</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="botaoSubmeter">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>500</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Submeter</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../recursos/recursos.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>telaInserirCliente</class>
+ <widget class="QMainWindow" name="telaInserirCliente">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>407</width>
+    <height>538</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#telaInserirCliente
+{
+background-image: url(:/fundos/fundo3.jpg);
+}
+#frameDados
+{
+background-color: rgba(13, 125, 159, 80);
+}
+#labelInfo
+{
+font: 14pt &quot;Noto Serif Malayalam&quot;;
+color: rgb(243, 234, 225);
+}
+
+#campoCodigo
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#campoNome
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#campoID
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#campoCPF
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#campoEmail
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#campoBanco
+{
+color: rgb(243, 234, 225);
+background-color: rgba(37, 128, 197, 150);
+}
+
+#botaoSubmeter
+{
+color: rgb(8, 76, 97);
+font: 12pt &quot;Noto Serif Malayalam&quot;;
+border-radius:5px;
+background-color: rgb(238, 219, 159);
+}
+#botaoSubmeter:hover
+{
+color: rgb(8, 76, 97);
+font: 12pt &quot;Noto Serif Malayalam&quot;;
+border-radius:5px;
+background-color: rgb(194, 178, 129);
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="frameDados">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>30</y>
+      <width>331</width>
+      <height>461</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>231</width>
+       <height>391</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLineEdit" name="campoCodigo">
+        <property name="placeholderText">
+         <string>CODIGO</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="campoNome">
+        <property name="placeholderText">
+         <string>NOME</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="campoID">
+        <property name="placeholderText">
+         <string>Nº DE IDENTIDADE</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="campoCPF">
+        <property name="placeholderText">
+         <string>CPF</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="campoEmail">
+        <property name="placeholderText">
+         <string>EMAIL</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="campoBanco">
+        <property name="placeholderText">
+         <string>BANCO</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QLabel" name="labelInfo">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>291</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="text">
+      <string>Insira aqui os dados do cliente</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="botaoSubmeter">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>500</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Submeter</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../recursos/recursos.qrc"/>
+ </resources>
+ <connections/>
+</ui>

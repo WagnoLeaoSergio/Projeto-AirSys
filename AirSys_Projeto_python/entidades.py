@@ -48,16 +48,23 @@ class Gerente(Pessoa):
     def __init__(self):
         Pessoa.__init__(self)
         self.__turno = "sem turno"
+        self.__senha = 0
 
     def setTurno(self, turno):
-        if turno != "manha" and turno != "tarde" and turno != "noite":
-            print("ERRO! turno nao reconhecido")
-            return
+        turnos = ["manha", "tarde", "noite", "sem turno"]
+        if turno not in turnos:
+            return "ERRO! turno nao reconhecido"
         else:
             self.__turno = turno
 
     def getTurno(self):
         return self.__turno
+
+    def setSenha(self, senha):
+        self.__senha = senha
+
+    def getSenha(self):
+        return self.__senha
 
 
 class Funcionario(Pessoa):
@@ -66,16 +73,22 @@ class Funcionario(Pessoa):
     def __init__(self):
         Pessoa.__init__(self)
         self.__numDeVendas = 0
+        self.__senha = 0
 
     def setNumDeVendas(self, numvendas):
         if numvendas < 0:
-            print("ERRO! NUMERO INVALIDO")
-            return
+            return "ERRO! NUMERO INVALIDO"
         else:
             self.__numDeVendas = numvendas
 
     def getNumDeVendas(self):
         return self.__numDeVendas
+
+    def setSenha(self, senha):
+        self.__senha = senha
+
+    def getSenha(self):
+        return self.__senha
 
 
 class Cliente(Pessoa):

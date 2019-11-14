@@ -1,13 +1,13 @@
 import controles
 
-z = controles.Passagem()
+z = controles.Cliente()
 
-lz = controles.ListaPassagens()
+lz = controles.ListaClientes()
 
-z.setCodigo("P0001")
-z.setOrigem("Juiz de Fora")
-z.setDestino("Niterói")
+z.setCodigo("C0002")
+z.setNome("Pedro")
 
-print(lz.buscarPassagem(codigo="P0001"))
-print(lz.registrarPassagem(codigo="P0001", passagem=z))
-print(lz.buscarPassagem(codigo="P0001"))
+# print(lz.registrarCliente("C0002", z))
+print(lz.buscarCliente(codigo="C0003"))
+
+print(lz.listarClientes())
