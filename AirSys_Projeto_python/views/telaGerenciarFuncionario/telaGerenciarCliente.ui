@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>telaGerenciarFuncionario</class>
+ <widget class="QMainWindow" name="telaGerenciarFuncionario">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>829</width>
+    <height>567</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>AirSys - Menu</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#telaGerenciarFuncionario
+{
+background-image: url(:/fundos/fundo3.jpg);
+}
+
+#tabelaFuncionario
+{
+border-radius: 10px;
+background-color: rgba(239, 230, 221, 150);
+}
+
+#frameListaOpcoes
+{
+border-radius: 10px;
+background-color: rgba(239, 230, 221, 150);
+}
+
+#listaOpcoes
+{
+font: 15pt &quot;MathJax_Size1&quot;;
+background-color: rgb(255, 255, 255, 0);
+}
+
+#botaoVoltar
+{
+font: 14pt &quot;Bitstream Vera Sans&quot;;
+border-radius:9px;
+color: rgb(243, 223, 162);
+background-color: rgb(3, 37, 108);
+}
+#botaoVoltar:hover
+{
+font: 14pt &quot;Bitstream Vera Sans&quot;;
+border-radius:9px;
+background-color: #6E8898;
+}
+
+#botaoInserir
+{
+font: 14pt &quot;Bitstream Vera Sans&quot;;
+border-radius:9px;
+color: rgb(3, 37, 108);
+background-color: #9FB1BC;
+}
+#botaoInserir:hover
+{
+font: 14pt &quot;Bitstream Vera Sans&quot;;
+border-radius:9px;
+background-color: #6E8898;
+}
+
+
+#botaoRemover
+{
+font: 14pt &quot;Bitstream Vera Sans&quot;;
+border-radius:9px;
+color: rgb(3, 37, 108);
+background-color: #9FB1BC;
+}
+#botaoRemover:hover
+{
+font: 14pt &quot;Bitstream Vera Sans&quot;;
+border-radius:9px;
+background-color: #6E8898;
+}
+
+#botaoAlterar
+{
+font: 14pt &quot;Bitstream Vera Sans&quot;;
+border-radius:9px;
+color: rgb(3, 37, 108);
+background-color: #9FB1BC;
+}
+#botaoAlterar:hover
+{
+font: 14pt &quot;Bitstream Vera Sans&quot;;
+border-radius:9px;
+background-color: #6E8898;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QTableWidget" name="tabelaFuncionario">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QAbstractScrollArea::AdjustIgnored</enum>
+        </property>
+        <property name="autoScroll">
+         <bool>true</bool>
+        </property>
+        <property name="showDropIndicator" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>false</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="showGrid">
+         <bool>true</bool>
+        </property>
+        <property name="gridStyle">
+         <enum>Qt::SolidLine</enum>
+        </property>
+        <property name="cornerButtonEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="rowCount">
+         <number>13</number>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>161</number>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderDefaultSectionSize">
+         <number>65</number>
+        </attribute>
+        <row>
+         <property name="text">
+          <string>New Row</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>New Row</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>New Row</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>New Row</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>New Row</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>New Row</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>New Row</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>New Row</string>
+         </property>
+        </row>
+        <row/>
+        <row/>
+        <row/>
+        <row/>
+        <row/>
+        <column>
+         <property name="text">
+          <string>New Column</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>codigo</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>nome</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>cpf</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>numVendas</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="botaoInserir">
+          <property name="text">
+           <string>Inserir</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="botaoRemover">
+          <property name="text">
+           <string>Remover</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="botaoAlterar">
+          <property name="text">
+           <string>Alterar</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="botaoVoltar">
+          <property name="text">
+           <string>Sair</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../recursos/recursos.qrc"/>
+ </resources>
+ <connections/>
+</ui>

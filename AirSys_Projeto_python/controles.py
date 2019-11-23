@@ -7,6 +7,8 @@ mainDB = pymongo.MongoClient(dbURI)
 
 
 class InterfaceListaEntidade:
+
+    @staticmethod
     def _registrarEntidade(codigoEntidade, nomeEntidade, listaEntidades,
                            dbEntidades, objEntidade, dictNewEntidade):
 
@@ -35,6 +37,7 @@ class InterfaceListaEntidade:
                     nomeEntidade, objEntidade.getCodigo()
                 )
 
+    @staticmethod
     def _removerEntidade(codigoEntidade, nomeEntidade, listaEntidades,
                          dbEntidades, objEntidade):
         if objEntidade is not None and codigoEntidade != objEntidade.getCodigo():
@@ -64,8 +67,9 @@ class InterfaceListaEntidade:
             return "{0} {1} nao encontrado(a)".format(
                 nomeEntidade, objEntidade.getCodigo())
 
+    @staticmethod
     def _buscarEntidade(codigoEntidade, nomeEntidade, listaEntidades,
-                        dbEntidades, objEntidade):
+                        dbEntidades, objEntidade, flag="normal"):
         if objEntidade is not None and codigoEntidade != objEntidade.getCodigo():
             return "ERRO! Codigo recebido e codigo do objeto diferentes"
 
@@ -128,10 +132,80 @@ class InterfaceListaEntidade:
                 listaEntidades.append(newObjEntidade)
                 return listaEntidades[listaEntidades.index(newObjEntidade)]
             else:
-                return "{0} {1} não encontrado".format(
-                    nomeEntidade, codigoEntidade
-                )
+                return None
 
+    @staticmethod
+    def _alterarEntidade(codigoEntidade, nomeEntidade, listaEntidades,
+                         dbEntidades, campo, valor):
+        entidade = InterfaceListaEntidade._buscarEntidade(
+            codigoEntidade,
+            nomeEntidade, listaEntidades,
+            dbEntidades, None
+        )
+        if entidade is None:
+            return "{0} nao encontrado".format(nomeEntidade)
+        else:
+            bibliotec = {"codigo": entidade.setCodigo}
+
+            if nomeEntidade == "Gerente":
+                bibliotec["nome"] = entidade.setNome
+                bibliotec["numIdentidade"] = entidade.setNumIdetidade
+                bibliotec["cpf"] = entidade.setCPF
+                bibliotec["email"] = entidade.setEmail
+                bibliotec["senha"] = entidade.setSenha
+                bibliotec["turno"] = entidade.setTurno
+            elif nomeEntidade == "Funcionario":
+                bibliotec["nome"] = entidade.setNome
+                bibliotec["numIdentidade"] = entidade.setNumIdetidade
+                bibliotec["cpf"] = entidade.setCPF
+                bibliotec["email"] = entidade.setEmail
+                bibliotec["numeroDeVendas"] = entidade.setNumDeVendas
+            elif nomeEntidade == "Cliente":
+                bibliotec["nome"] = entidade.setNome
+                bibliotec["numIdentidade"] = entidade.setNumIdetidade
+                bibliotec["cpf"] = entidade.setCPF
+                bibliotec["email"] = entidade.setEmail
+                bibliotec["banco"] = entidade.setBanco
+            elif nomeEntidade == "Passagem":
+                bibliotec["origem"] = entidade.setOrigem
+                bibliotec["destino"] = entidade.setDestino
+                bibliotec["data"] = entidade.setData
+                bibliotec["companhia"] = entidade.setCompanhia
+                bibliotec["assento"] = entidade.setAssento
+                bibliotec["estado"] = entidade.setEstado
+                bibliotec["preco"] = entidade.setPreco
+                bibliotec["dataCompra"] = entidade.setDataCompra
+
+            checkEntidade = dbEntidades.find_one(
+                {'codigo': codigoEntidade}
+            )
+
+            checkEntidade[campo] = valor
+
+            InterfaceListaEntidade._removerEntidade(
+                codigoEntidade,
+                nomeEntidade,
+                listaEntidades,
+                dbEntidades,
+                entidade
+            )
+
+            bibliotec[campo](valor)
+
+            dictEntidade = checkEntidade
+
+            InterfaceListaEntidade._registrarEntidade(
+                codigoEntidade,
+                nomeEntidade,
+                listaEntidades,
+                dbEntidades,
+                entidade,
+                dictEntidade
+            )
+
+            return 1
+
+    @staticmethod
     def _listarTodos(nomeEntidade, dbEntidades):
         todos = []
         i = 0
@@ -140,6 +214,7 @@ class InterfaceListaEntidade:
             todos.append({"element{0}".format(i): document})
             i = i + 1
         return todos
+
 
 class ListaGerentes:
     """ docstring for ListaGerentes """
@@ -187,6 +262,17 @@ class ListaGerentes:
             listaEntidades=self.__gerentes,
             dbEntidades=self.dbGerentes,
             objEntidade=gerente,
+        )
+        return result
+
+    def alterarGerente(self, codigo, campo, valor):
+        result = InterfaceListaEntidade._alterarEntidade(
+            codigoEntidade=codigo,
+            nomeEntidade="Gerente",
+            listaEntidades=self.__gerentes,
+            dbEntidades=self.dbGerentes,
+            campo=campo,
+            valor=valor
         )
         return result
 
@@ -244,6 +330,18 @@ class ListaFuncionarios:
             listaEntidades=self.__funcionarios,
             dbEntidades=self.dbFuncionarios,
             objEntidade=funcionario
+        )
+
+        return result
+
+    def alterarFuncionario(self, codigo, campo, valor):
+        result = InterfaceListaEntidade._alterarEntidade(
+            codigoEntidade=codigo,
+            nomeEntidade="Funcionario",
+            listaEntidades=self.__funcionarios,
+            dbEntidades=self.dbFuncionarios,
+            campo=campo,
+            valor=valor
         )
 
         return result
@@ -307,6 +405,18 @@ class ListaClientes:
 
         return result
 
+    def alterarCliente(self, codigo, campo, valor):
+        result = InterfaceListaEntidade._alterarEntidade(
+            codigoEntidade=codigo,
+            nomeEntidade="Cliente",
+            listaEntidades=self.__clientes,
+            dbEntidades=self.dbClientes,
+            campo=campo,
+            valor=valor
+        )
+
+        return result
+
     def listarClientes(self):
         result = InterfaceListaEntidade._listarTodos(
             nomeEntidade="Cliente",
@@ -364,6 +474,18 @@ class ListaPassagens:
             listaEntidades=self.__passagens,
             dbEntidades=self.dbPassagens,
             objEntidade=passagem
+        )
+
+        return result
+
+    def alterarPassagem(self, codigo, campo, valor):
+        result = InterfaceListaEntidade._alterarEntidade(
+            codigoEntidade=codigo,
+            nomeEntidade="Passagem",
+            listaEntidades=self.__passagens,
+            dbEntidades=self.dbPassagens,
+            campo=campo,
+            valor=valor
         )
 
         return result

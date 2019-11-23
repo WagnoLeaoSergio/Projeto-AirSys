@@ -1,361 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>telaMenuGerente</class>
- <widget class="QMainWindow" name="telaMenuGerente">
+ <class>telaOpcoesFuncionario</class>
+ <widget class="QMainWindow" name="telaOpcoesFuncionario">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>751</width>
-    <height>678</height>
+    <width>381</width>
+    <height>505</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>AirSys - Menu</string>
+   <string>AirSys</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#telaMenuGerente
+   <string notr="true">#telaOpcoesFuncionario
 {
-background-image: url(:/fundos/fundo3.jpg);
+background-image: url(:/fundos/fundo4.jpg);
 }
 
-#tabelaFuncionarios
+#frame
 {
-border-radius: 10px;
-background-color: rgba(239, 230, 221, 150);
+background-color: rgba(6, 190, 225, 70);
 }
 
-#frameListaOpcoes
+#botaoFuncionarios
 {
-border-radius: 10px;
-background-color: rgba(239, 230, 221, 150);
+border-radius: 5px;
+background-color: rgb(12, 123, 157);
+font: 14pt &quot;Noto Serif Malayalam&quot;;
 }
 
-#listaOpcoes
+#botaoFuncionarios:hover
 {
-font: 15pt &quot;MathJax_Size1&quot;;
-background-color: rgb(255, 255, 255, 0);
+border-radius: 5px;
+background-color: rgb(145, 206, 243);
+font: 14pt &quot;Noto Serif Malayalam&quot;;
 }
 
-#botaoSair
+#botaoClientes
 {
-font: 14pt &quot;Bitstream Vera Sans&quot;;
-border-radius:9px;
-color: rgb(243, 243, 125);
-background-color: rgb(3, 37, 108);
-}
-#botaoSair:hover
-{
-font: 14pt &quot;Bitstream Vera Sans&quot;;
-border-radius:9px;
-background-color: #6E8898;
+border-radius: 5px;
+background-color: rgb(12, 123, 157);
+font: 14pt &quot;Noto Serif Malayalam&quot;;
 }
 
-#botaoRegistrar
+#botaoClientes:hover
 {
-font: 14pt &quot;Bitstream Vera Sans&quot;;
-border-radius:9px;
-color: rgb(125, 47, 49);
-background-color: #9FB1BC;
-}
-#botaoRegistrar:hover
-{
-font: 14pt &quot;Bitstream Vera Sans&quot;;
-border-radius:9px;
-background-color: #6E8898;
-}
-#botaoRemover
-{
-font: 14pt &quot;Bitstream Vera Sans&quot;;
-border-radius:9px;
-color: rgb(125, 47, 49);
-background-color: #9FB1BC;
-}
-#botaoRemover:hover
-{
-font: 14pt &quot;Bitstream Vera Sans&quot;;
-border-radius:9px;
-background-color: #6E8898;
+border-radius: 5px;
+background-color: rgb(145, 206, 243);
+font: 14pt &quot;Noto Serif Malayalam&quot;;
 }
 
-#botaoAlterar
+#botaoPassagens
 {
-font: 14pt &quot;Bitstream Vera Sans&quot;;
-border-radius:9px;
-color: rgb(125, 47, 49);
-background-color: #9FB1BC;
+border-radius: 5px;
+background-color: rgb(12, 123, 157);
+font: 14pt &quot;Noto Serif Malayalam&quot;;
 }
-#botaoAlterar:hover
+
+#botaoPassagens:hover
 {
-font: 14pt &quot;Bitstream Vera Sans&quot;;
-border-radius:9px;
-background-color: #6E8898;
+border-radius: 5px;
+background-color: rgb(145, 206, 243);
+font: 14pt &quot;Noto Serif Malayalam&quot;;
+}
+
+#botaoVoltar
+{
+border-radius: 5px;
+background-color: rgb(75, 117, 232);
+font: 14pt &quot;Noto Serif Malayalam&quot;;
+}
+
+#botaoVoltar:hover
+{
+border-radius: 5px;
+background-color: rgb(121, 173, 255);
+font: 14pt &quot;Noto Serif Malayalam&quot;;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_6">
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_6" stretch="1,0">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetNoConstraint</enum>
-      </property>
-      <property name="leftMargin">
-       <number>5</number>
-      </property>
-      <property name="rightMargin">
-       <number>5</number>
-      </property>
-      <property name="bottomMargin">
-       <number>5</number>
-      </property>
-      <item>
-       <widget class="QFrame" name="frameListaOpcoes">
-        <property name="minimumSize">
-         <size>
-          <width>201</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>374</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <widget class="QTreeWidget" name="listaOpcoes">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>40</y>
-           <width>161</width>
-           <height>301</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>MathJax_Size1</family>
-           <pointsize>15</pointsize>
-           <weight>50</weight>
-           <italic>false</italic>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="autoScroll">
-          <bool>false</bool>
-         </property>
-         <property name="editTriggers">
-          <set>QAbstractItemView::EditKeyPressed</set>
-         </property>
-         <property name="selectionMode">
-          <enum>QAbstractItemView::SingleSelection</enum>
-         </property>
-         <property name="indentation">
-          <number>30</number>
-         </property>
-         <property name="uniformRowHeights">
-          <bool>false</bool>
-         </property>
-         <property name="sortingEnabled">
-          <bool>false</bool>
-         </property>
-         <property name="allColumnsShowFocus">
-          <bool>false</bool>
-         </property>
-         <attribute name="headerVisible">
-          <bool>false</bool>
-         </attribute>
-         <attribute name="headerCascadingSectionResizes">
-          <bool>true</bool>
-         </attribute>
-         <attribute name="headerMinimumSectionSize">
-          <number>30</number>
-         </attribute>
-         <column>
-          <property name="text">
-           <string>Opções</string>
-          </property>
-          <property name="textAlignment">
-           <set>AlignCenter</set>
-          </property>
-         </column>
-         <item>
-          <property name="text">
-           <string>Clientes</string>
-          </property>
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>Registrar</string>
-           </property>
-          </item>
-         </item>
-         <item>
-          <property name="text">
-           <string>Passagens</string>
-          </property>
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-         </item>
-        </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="botaoSair">
-        <property name="minimumSize">
-         <size>
-          <width>201</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>374</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Sair</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_8">
-      <property name="bottomMargin">
-       <number>5</number>
-      </property>
-      <item>
-       <widget class="QTableWidget" name="tabelaFuncionarios">
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="verticalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOff</enum>
-        </property>
-        <property name="sizeAdjustPolicy">
-         <enum>QAbstractScrollArea::AdjustIgnored</enum>
-        </property>
-        <property name="autoScroll">
-         <bool>true</bool>
-        </property>
-        <property name="showDropIndicator" stdset="0">
-         <bool>false</bool>
-        </property>
-        <property name="alternatingRowColors">
-         <bool>false</bool>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::SingleSelection</enum>
-        </property>
-        <property name="selectionBehavior">
-         <enum>QAbstractItemView::SelectRows</enum>
-        </property>
-        <property name="showGrid">
-         <bool>true</bool>
-        </property>
-        <property name="gridStyle">
-         <enum>Qt::DashLine</enum>
-        </property>
-        <property name="cornerButtonEnabled">
-         <bool>false</bool>
-        </property>
-        <property name="rowCount">
-         <number>9</number>
-        </property>
-        <property name="columnCount">
-         <number>6</number>
-        </property>
-        <attribute name="horizontalHeaderVisible">
-         <bool>false</bool>
-        </attribute>
-        <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>238</number>
-        </attribute>
-        <attribute name="horizontalHeaderStretchLastSection">
-         <bool>false</bool>
-        </attribute>
-        <attribute name="verticalHeaderVisible">
-         <bool>false</bool>
-        </attribute>
-        <attribute name="verticalHeaderDefaultSectionSize">
-         <number>60</number>
-        </attribute>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <row/>
-        <column/>
-        <column/>
-        <column/>
-        <column/>
-        <column/>
-        <column/>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
-        <item>
-         <widget class="QPushButton" name="botaoRegistrar">
-          <property name="text">
-           <string>Registrar</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="botaoAlterar">
-          <property name="text">
-           <string>Alterar</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="botaoRemover">
-          <property name="text">
-           <string>Remover</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>751</width>
-     <height>22</height>
-    </rect>
-   </property>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>30</y>
+      <width>301</width>
+      <height>461</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="botaoClientes">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>60</y>
+       <width>231</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Clientes</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="botaoPassagens">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>230</y>
+       <width>231</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Passagens</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="botaoVoltar">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>410</y>
+       <width>231</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Voltar</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources>

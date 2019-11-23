@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>telaOpcoesPassagem</class>
+ <widget class="QMainWindow" name="telaOpcoesPassagem">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>311</width>
+    <height>321</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>311</width>
+    <height>321</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>330</width>
+    <height>321</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>AirSys</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#telaOpcoesPassagem
+{
+background-image: url(:/fundos/fundo3.jpg);
+}
+
+#botaoGerenciar
+{
+border-radius: 5px;
+background-color: rgb(12, 123, 157);
+font: 12pt &quot;Noto Serif Malayalam&quot;;
+}
+
+#botaoGerenciar:hover
+{
+border-radius: 5px;
+background-color: rgb(145, 206, 243);
+font: 12pt &quot;Noto Serif Malayalam&quot;;
+}
+
+
+#botaoConsultar
+{
+border-radius: 5px;
+background-color: rgb(12, 123, 157);
+font: 12pt &quot;Noto Serif Malayalam&quot;;
+}
+
+#botaoConsultar:hover
+{
+border-radius: 5px;
+background-color: rgb(145, 206, 243);
+font: 12pt &quot;Noto Serif Malayalam&quot;;
+}
+
+#botaoVoltar
+{
+border-radius: 5px;
+background-color: rgb(75, 117, 232);
+font: 12pt &quot;Noto Serif Malayalam&quot;;
+}
+
+#botaoVoltar:hover
+{
+border-radius: 5px;
+background-color: rgb(121, 173, 255);
+font: 12pt &quot;Noto Serif Malayalam&quot;;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="botaoGerenciar">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>50</y>
+      <width>221</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gerenciar Passagens</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="botaoConsultar">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>140</y>
+      <width>221</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Consultar Passagens</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="botaoVoltar">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>250</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Voltar</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../recursos/recursos.qrc"/>
+ </resources>
+ <connections/>
+</ui>

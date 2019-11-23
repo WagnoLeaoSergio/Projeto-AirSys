@@ -22,6 +22,9 @@ Projeto final da disciplina de Modelagem de Sistemas turma 2019-3.
 - pyQT5 + QtDesigner
 
 `sudo sudo apt-get install python3-pyqt5 `
+
 `sudo apt-get install pyqt5-dev-tools `
+
 `sudo apt-get install qttools5-dev-tools`
+
 `designer`

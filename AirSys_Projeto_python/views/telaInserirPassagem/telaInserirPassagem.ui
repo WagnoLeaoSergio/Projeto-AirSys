@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#telaInserirFuncionario
+   <string notr="true">#telaInserirPassagem
 {
 background-image: url(:/fundos/fundo3.jpg);
 }
