@@ -5,15 +5,18 @@
 # Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
+
 import sys
+import recursos_rc
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 sys.path.append("../../")
-import views.recursos.recursos_rc
+
 import controles
 
 
-class Ui_Login(QtWidgets.QMainWindow):
+class Login(QtWidgets.QWidget):
+
     switch_window = QtCore.pyqtSignal()
 
     def checarCredenciais(self):
@@ -31,9 +34,12 @@ class Ui_Login(QtWidgets.QMainWindow):
 
             if buscaF is not None:
                 print("Pode logar funcionario!")
+                self.switch_window.emit()
             elif buscaG is not None:
                 print("Pode logar gerente!")
-                from views.telaMenuGerente.telaMenuGerente import Ui_telaOpcoesGerente
+                sys.path.append("../")
+                from telaMenuGerente.telaMenuGerente import Ui_telaOpcoesGerente
+                self.hide()
                 self.telaOpcoes = QtWidgets.QMainWindow()
                 self.opcoesGerente = Ui_telaOpcoesGerente()
                 self.opcoesGerente.setupUi(self.telaOpcoes)
@@ -41,79 +47,76 @@ class Ui_Login(QtWidgets.QMainWindow):
             else:
                 print("Usuario ou senha incorretos")
 
-    def changing(self):
-        self.setVisible(False)
-        self.checarCredenciais()
-
-    def setupUi(self, Login):
-        Login.setObjectName("Login")
-        Login.resize(425, 504)
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(425, 504)
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(169)
         sizePolicy.setVerticalStretch(20)
-        sizePolicy.setHeightForWidth(Login.sizePolicy().hasHeightForWidth())
-        Login.setSizePolicy(sizePolicy)
-        Login.setMinimumSize(QtCore.QSize(425, 504))
-        Login.setMaximumSize(QtCore.QSize(425, 504))
+        sizePolicy.setHeightForWidth(
+            MainWindow.sizePolicy().hasHeightForWidth())
+        MainWindow.setSizePolicy(sizePolicy)
+        MainWindow.setMinimumSize(QtCore.QSize(425, 504))
+        MainWindow.setMaximumSize(QtCore.QSize(425, 504))
         font = QtGui.QFont()
         font.setBold(False)
         font.setWeight(50)
-        Login.setFont(font)
-        Login.setFocusPolicy(QtCore.Qt.NoFocus)
-        Login.setAutoFillBackground(False)
-        Login.setStyleSheet("#Login\n"
-                            "{\n"
-                            "background-image: url(:/fundos/fundo.jpg);\n"
-                            "}\n"
-                            "\n"
-                            "#frame\n"
-                            "{\n"
-                            "background-color: rgba(46, 82, 102, 200);\n"
-                            "}\n"
-                            "\n"
-                            "#label_codigo\n"
-                            "{\n"
-                            "color: rgb(246, 238, 226);\n"
-                            "font: 75 14pt \"MathJax_SansSerif\";\n"
-                            "}\n"
-                            "\n"
-                            "#CampoCodigo\n"
-                            "{\n"
-                            "color: rgb(211, 208, 203);\n"
-                            "background-color: #6E8898;\n"
-                            "}\n"
-                            "\n"
-                            "#label_senha\n"
-                            "{\n"
-                            "color: rgb(246, 238, 226);\n"
-                            "font: 75 14pt \"MathJax_SansSerif\";\n"
-                            "}\n"
-                            "\n"
-                            "#CampoSenha\n"
-                            "{\n"
-                            "color: rgb(211, 208, 203);\n"
-                            "background-color: #6E8898;\n"
-                            "}\n"
-                            "\n"
-                            "#label\n"
-                            "{\n"
-                            "color: rgb(255, 255, 255);\n"
-                            "font: 75 15pt \"Noto Serif Khmer\";\n"
-                            "}\n"
-                            "\n"
-                            "#BotaoLogar\n"
-                            "{\n"
-                            "color:#D3D0CB;\n"
-                            "background-color: rgb(66, 85, 99);\n"
-                            "border-radius:10px;\n"
-                            "}\n"
-                            "#BotaoLogar:hover\n"
-                            "{\n"
-                            "background-color: rgb(122, 168, 199);\n"
-                            "border-radius:10px;\n"
-                            "}")
-        self.centralwidget = QtWidgets.QWidget(Login)
+        MainWindow.setFont(font)
+        MainWindow.setFocusPolicy(QtCore.Qt.NoFocus)
+        MainWindow.setAutoFillBackground(False)
+        MainWindow.setStyleSheet("#MainWindow\n"
+                                 "{\n"
+                                 "background-image: url(:/newPrefix/fundo.jpg);\n"
+                                 "}\n"
+                                 "\n"
+                                 "#frame\n"
+                                 "{\n"
+                                 "background-color: rgba(46, 82, 102, 200);\n"
+                                 "}\n"
+                                 "\n"
+                                 "#label_codigo\n"
+                                 "{\n"
+                                 "color: rgb(246, 238, 226);\n"
+                                 "font: 75 14pt \"MathJax_SansSerif\";\n"
+                                 "}\n"
+                                 "\n"
+                                 "#CampoCodigo\n"
+                                 "{\n"
+                                 "color: rgb(211, 208, 203);\n"
+                                 "background-color: #6E8898;\n"
+                                 "}\n"
+                                 "\n"
+                                 "#label_senha\n"
+                                 "{\n"
+                                 "color: rgb(246, 238, 226);\n"
+                                 "font: 75 14pt \"MathJax_SansSerif\";\n"
+                                 "}\n"
+                                 "\n"
+                                 "#CampoSenha\n"
+                                 "{\n"
+                                 "color: rgb(211, 208, 203);\n"
+                                 "background-color: #6E8898;\n"
+                                 "}\n"
+                                 "\n"
+                                 "#label\n"
+                                 "{\n"
+                                 "color: rgb(255, 255, 255);\n"
+                                 "font: 75 15pt \"Noto Serif Khmer\";\n"
+                                 "}\n"
+                                 "\n"
+                                 "#BotaoLogar\n"
+                                 "{\n"
+                                 "color:#D3D0CB;\n"
+                                 "background-color: rgb(66, 85, 99);\n"
+                                 "border-radius:10px;\n"
+                                 "}\n"
+                                 "#BotaoLogar:hover\n"
+                                 "{\n"
+                                 "background-color: rgb(122, 168, 199);\n"
+                                 "border-radius:10px;\n"
+                                 "}")
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setGeometry(QtCore.QRect(15, 30, 391, 451))
@@ -158,7 +161,7 @@ class Ui_Login(QtWidgets.QMainWindow):
         self.CampoSenha.setObjectName("CampoSenha")
         self.BotaoLogar = QtWidgets.QPushButton(self.frame)
         # BOTAO
-        self.BotaoLogar.clicked.connect(self.changing)
+        self.BotaoLogar.clicked.connect(self.checarCredenciais)
         self.BotaoLogar.setGeometry(QtCore.QRect(140, 370, 121, 41))
         font = QtGui.QFont()
         font.setFamily("Noto Sans CJK TC")
@@ -187,25 +190,26 @@ class Ui_Login(QtWidgets.QMainWindow):
         self.label_senha = QtWidgets.QLabel(self.frame)
         self.label_senha.setGeometry(QtCore.QRect(30, 250, 101, 31))
         self.label_senha.setObjectName("label_senha")
-        Login.setCentralWidget(self.centralwidget)
+        MainWindow.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(Login)
-        QtCore.QMetaObject.connectSlotsByName(Login)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, Login):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        Login.setWindowTitle(_translate("Login", "AirSys - Login"))
-        self.BotaoLogar.setText(_translate("Login", "Logar"))
-        self.BotaoLogar.setShortcut(_translate("Login", "Return"))
-        self.label.setText(_translate("Login", "Entre com seu código e senha"))
-        self.label_codigo.setText(_translate("Login", "Codigo"))
-        self.label_senha.setText(_translate("Login", "Senha"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "AirSys - Login"))
+        self.BotaoLogar.setText(_translate("MainWindow", "Logar"))
+        self.BotaoLogar.setShortcut(_translate("MainWindow", "Return"))
+        self.label.setText(_translate(
+            "MainWindow", "Entre com seu código e senha"))
+        self.label_codigo.setText(_translate("MainWindow", "Codigo"))
+        self.label_senha.setText(_translate("MainWindow", "Senha"))
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    Login = QtWidgets.QMainWindow()
-    ui = Ui_Login()
-    ui.setupUi(Login)
-    Login.show()
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Login()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
     sys.exit(app.exec_())

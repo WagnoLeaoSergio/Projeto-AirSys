@@ -4,11 +4,11 @@ z = controles.Passagem()
 
 lz = controles.ListaPassagens()
 
-#z.setCodigo("G0001")
+z.setCodigo("P0003")
 
-#print(lz.registrarGerente("G0001", z))
-print(lz.buscarPassagem(codigo="P0001").getDestino())
+print(lz.registrarPassagem("P0003", z))
+print(lz.buscarPassagem(codigo="P0003").getDestino())
 
 print(lz.listarPassagens())
 
-print(lz.alterarPassagem(codigo="P0001", campo="destino", valor="Beyond"))
+#print(lz.alterarPassagem(codigo="P0001", campo="destino", valor="Beyond"))

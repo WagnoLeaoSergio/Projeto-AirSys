@@ -66,14 +66,14 @@ background-color: rgb(145, 206, 243);
 font: 14pt &quot;Noto Serif Malayalam&quot;;
 }
 
-#botaoVoltar
+#botaoSair
 {
 border-radius: 5px;
 background-color: rgb(75, 117, 232);
 font: 14pt &quot;Noto Serif Malayalam&quot;;
 }
 
-#botaoVoltar:hover
+#botaoSair:hover
 {
 border-radius: 5px;
 background-color: rgb(121, 173, 255);
@@ -135,7 +135,7 @@ font: 14pt &quot;Noto Serif Malayalam&quot;;
       <string>Passagens</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="botaoVoltar">
+    <widget class="QPushButton" name="botaoSair">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -145,7 +145,7 @@ font: 14pt &quot;Noto Serif Malayalam&quot;;
       </rect>
      </property>
      <property name="text">
-      <string>Voltar</string>
+      <string>Sair</string>
      </property>
     </widget>
    </widget>

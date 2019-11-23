@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="fundos">
+    <file>fundo.jpg</file>
     <file>fundo3.jpg</file>
     <file>fundo4.jpg</file>
   </qresource>

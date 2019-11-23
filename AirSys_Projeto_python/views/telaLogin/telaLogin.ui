@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Login</class>
+ <widget class="QMainWindow" name="Login">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -44,9 +44,9 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">#MainWindow
+   <string notr="true">#Login
 {
-background-image: url(:/newPrefix/fundo.jpg);
+background-image: url(:/fundos/fundo.jpg);
 }
 
 #frame
@@ -276,7 +276,7 @@ border-radius:10px;
   </widget>
  </widget>
  <resources>
-  <include location="recursos.qrc"/>
+  <include location="../recursos/recursos.qrc"/>
  </resources>
  <connections/>
 </ui>
