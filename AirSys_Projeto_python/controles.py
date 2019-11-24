@@ -196,7 +196,6 @@ class InterfaceListaEntidade:
                 nomeEntidade,
                 listaEntidades,
                 dbEntidades,
-                entidade
             )
 
             bibliotec[campo](valor)

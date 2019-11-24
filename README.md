@@ -19,7 +19,7 @@ Projeto final da disciplina de Modelagem de Sistemas turma 2019-3.
 
 `sudo python3 -m pip install pymongo[srv]`
 
-- pyQT5 + QtDesigner
+- pyQt5 + QtDesigner
 
 `sudo sudo apt-get install python3-pyqt5 `
 

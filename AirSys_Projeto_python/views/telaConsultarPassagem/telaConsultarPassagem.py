@@ -183,7 +183,7 @@ class Ui_telaConsultarPassagem(object):
         item = QtWidgets.QTableWidgetItem()
         self.tabelaPassagem.setHorizontalHeaderItem(4, item)
         self.tabelaPassagem.horizontalHeader().setVisible(False)
-        self.tabelaPassagem.horizontalHeader().setDefaultSectionSize(167)
+        self.tabelaPassagem.horizontalHeader().setDefaultSectionSize(240)
         self.tabelaPassagem.horizontalHeader().setStretchLastSection(False)
         self.tabelaPassagem.verticalHeader().setVisible(False)
         self.tabelaPassagem.verticalHeader().setDefaultSectionSize(65)

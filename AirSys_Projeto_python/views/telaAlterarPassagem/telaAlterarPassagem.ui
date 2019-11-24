@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>telaAlterarPassagem</class>
+ <widget class="QMainWindow" name="telaAlterarPassagem">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>449</width>
+    <height>326</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>449</width>
+    <height>326</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>449</width>
+    <height>326</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#telaAlterarPassagem
+{
+background-image: url(:/fundos/fundo3.jpg);
+}
+#label
+{
+color: rgb(247, 238, 229);
+font: 11pt &quot;Noto Serif Malayalam&quot;;
+}
+
+#comboBoxOpcoes
+{
+font: 11pt &quot;Noto Serif Malayalam&quot;;
+background-color: rgba(201, 201, 238, 100);
+}
+
+#label_2
+{
+color: rgb(247, 238, 229);
+font: 11pt &quot;Noto Serif Malayalam&quot;;
+}
+#campoNovoValor
+{
+font: 10pt &quot;Noto Serif Malayalam&quot;;
+background-color: rgba(201, 201, 238, 100);
+}
+
+#botaoAlterar
+{
+border-radius:5px;
+background-color: rgb(44, 134, 230);
+font: 11pt &quot;Noto Serif Malayalam&quot;;
+}
+#botaoAlterar:hover
+{
+border-radius:5px;
+background-color: rgb(140, 236, 241);
+font: 11pt &quot;Noto Serif Malayalam&quot;;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="botaoAlterar">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>250</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Alterar</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="campoNovoValor">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>190</y>
+      <width>281</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="placeholderText">
+     <string>Novo valor</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBoxOpcoes">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>100</y>
+      <width>281</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>origem</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>destino</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>data</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>preco</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>companhia</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>assento</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>70</y>
+      <width>281</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Escolha o campo a ser alterado:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>160</y>
+      <width>271</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Digite o novo valor do campo:</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../recursos/recursos.qrc"/>
+ </resources>
+ <connections/>
+</ui>

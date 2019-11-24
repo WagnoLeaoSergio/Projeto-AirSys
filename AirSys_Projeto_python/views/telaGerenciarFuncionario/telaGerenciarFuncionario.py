@@ -42,12 +42,30 @@ class Ui_telaGerenciarFuncionario(object):
                     row, column, QTableWidgetItem((data[row][column]))
                 )
 
+    def remover(self):
+        # encotrar indice da linha selecionada:
+        # indexes = self.tabelaFuncionario.selectionModel().selectedRows()
+        # remvIndex = indexes[0].row()
+        cod = self.tabelaFuncionario.item(self.tabelaFuncionario.currentRow(), 0).text()
+        self.fList.removerFuncionario(cod)
+        self.updateTable()
+
     def switchToRegistrar(self, ui):
         from views.telaInserirFuncionario.telaInserirFuncionario import Ui_telaInserirFuncionario
         self.tela = QtWidgets.QMainWindow()
         self.registrar = Ui_telaInserirFuncionario(self)
         self.registrar.setupUi(self.tela)
         self.tela.show()
+
+    def switchToAlterar(self, ui):
+        from views.telaAlterarFuncionario.telaAlterarFuncionario import Ui_telaAlterarFuncionario
+        cod = self.tabelaFuncionario.item(self.tabelaFuncionario.currentRow(), 0).text()
+        self.tela = QtWidgets.QMainWindow()
+        self.alterar = Ui_telaAlterarFuncionario(self, cod)
+        self.alterar.setupUi(self.tela)
+        self.tela.show()
+        self.updateTable()
+
 
     def switchSair(self, ui):
             from views.telaMenuGerente.telaMenuGerente import Ui_telaOpcoesGerente
@@ -209,9 +227,13 @@ class Ui_telaGerenciarFuncionario(object):
         self.botaoRemover = QtWidgets.QPushButton(self.centralwidget)
         self.botaoRemover.setObjectName("botaoRemover")
         self.horizontalLayout.addWidget(self.botaoRemover)
+        self.botaoRemover.clicked.connect(self.remover)
         self.botaoAlterar = QtWidgets.QPushButton(self.centralwidget)
         self.botaoAlterar.setObjectName("botaoAlterar")
         self.horizontalLayout.addWidget(self.botaoAlterar)
+        self.botaoAlterar.clicked.connect(
+            lambda: self.switchToAlterar(telaGerenciarFuncionario)
+        )
         self.botaoSair = QtWidgets.QPushButton(self.centralwidget)
         self.botaoSair.setObjectName("botaoSair")
         self.botaoSair.clicked.connect(

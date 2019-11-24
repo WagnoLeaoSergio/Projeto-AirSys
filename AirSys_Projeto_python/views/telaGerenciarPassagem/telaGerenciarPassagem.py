@@ -67,6 +67,15 @@ class Ui_telaGerenciarPassagem(object):
         self.registrar.setupUi(self.tela)
         self.tela.show()
 
+    def switchToAlterar(self, ui):
+        from views.telaAlterarPassagem.telaAlterarPassagem import Ui_telaAlterarPassagem
+        cod = self.tabelaPassagem.item(self.tabelaPassagem.currentRow(), 0).text()
+        self.tela = QtWidgets.QMainWindow()
+        self.alterar = Ui_telaAlterarPassagem(self, cod)
+        self.alterar.setupUi(self.tela)
+        self.tela.show()
+        self.updateTable()
+
     def switchSair(self, ui):
         from views.telaOpcoesPassagem.telaOpcoesPassagem import Ui_telaOpcoesPassagem
         self.tela = QtWidgets.QMainWindow()
@@ -232,6 +241,9 @@ class Ui_telaGerenciarPassagem(object):
         self.botaoAlterar = QtWidgets.QPushButton(self.centralwidget)
         self.botaoAlterar.setObjectName("botaoAlterar")
         self.horizontalLayout.addWidget(self.botaoAlterar)
+        self.botaoAlterar.clicked.connect(
+            lambda: self.switchToAlterar(telaGerenciarPassagem)
+        )
         self.botaoSair = QtWidgets.QPushButton(self.centralwidget)
         self.botaoSair.setObjectName("botaoSair")
         self.horizontalLayout.addWidget(self.botaoSair)

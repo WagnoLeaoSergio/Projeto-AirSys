@@ -65,6 +65,15 @@ class Ui_telaGerenciarCliente:
         self.tela.show()
         self.updateTable()
 
+    def switchToAlterar(self, ui):
+        from views.telaAlterarCliente.telaAlterarCliente import Ui_telaAlterarCliente
+        cod = self.tabelaCliente.item(self.tabelaCliente.currentRow(), 0).text()
+        self.tela = QtWidgets.QMainWindow()
+        self.alterar = Ui_telaAlterarCliente(self, cod)
+        self.alterar.setupUi(self.tela)
+        self.tela.show()
+        self.updateTable()
+
     def switchSair(self, ui):
         if self.telaAnterior == "Funcionario":
             from views.telaMenuFuncionario.telaOpcoesFuncionario import Ui_telaOpcoesFuncionario
@@ -237,6 +246,9 @@ class Ui_telaGerenciarCliente:
         self.botaoAlterar = QtWidgets.QPushButton(self.centralwidget)
         self.botaoAlterar.setObjectName("botaoAlterar")
         self.horizontalLayout.addWidget(self.botaoAlterar)
+        self.botaoAlterar.clicked.connect(
+            lambda: self.switchToAlterar(telaGerenciarCliente)
+        )
         self.botaoSair = QtWidgets.QPushButton(self.centralwidget)
         self.botaoSair.setObjectName("botaoSair")
         self.botaoSair.clicked.connect(
