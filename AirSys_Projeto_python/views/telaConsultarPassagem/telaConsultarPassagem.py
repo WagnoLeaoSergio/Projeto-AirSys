@@ -61,6 +61,22 @@ class Ui_telaConsultarPassagem(object):
         ui.hide()
         self.tela.show()
 
+    def switchToVender(self, ui):
+        from views.telaVenderPassagem.telaVenderPassagem import Ui_telaVendaPassagem
+        cod = self.tabelaPassagem.item(self.tabelaPassagem.currentRow(), 0).text()
+        self.tela = QtWidgets.QMainWindow()
+        self.pVender = Ui_telaVendaPassagem(self, cod)
+        self.pVender.setupUi(self.tela)
+        self.tela.show()
+
+    def switchToReservar(self, ui):
+        from views.telaReservarPassagem.telaReservarPassagem import Ui_telaReservaPassagem
+        cod = self.tabelaPassagem.item(self.tabelaPassagem.currentRow(), 0).text()
+        self.tela = QtWidgets.QMainWindow()
+        self.pReservar = Ui_telaReservaPassagem(self, cod)
+        self.pReservar.setupUi(self.tela)
+        self.tela.show()
+
     def setupUi(self, telaConsultarPassagem):
         telaConsultarPassagem.setObjectName("telaConsultarPassagem")
         telaConsultarPassagem.resize(857, 508)
@@ -101,14 +117,14 @@ class Ui_telaConsultarPassagem(object):
                                             "background-color: #6E8898;\n"
                                             "}\n"
                                             "\n"
-                                            "#botaoComprar\n"
+                                            "#botaoVender\n"
                                             "{\n"
                                             "font: 14pt \"Bitstream Vera Sans\";\n"
                                             "border-radius:9px;\n"
                                             "color: rgb(3, 37, 108);\n"
                                             "background-color: #9FB1BC;\n"
                                             "}\n"
-                                            "#botaoComprar:hover\n"
+                                            "#botaoVender:hover\n"
                                             "{\n"
                                             "font: 14pt \"Bitstream Vera Sans\";\n"
                                             "border-radius:9px;\n"
@@ -190,12 +206,18 @@ class Ui_telaConsultarPassagem(object):
         self.verticalLayout.addWidget(self.tabelaPassagem)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.botaoComprar = QtWidgets.QPushButton(self.centralwidget)
-        self.botaoComprar.setObjectName("botaoComprar")
-        self.horizontalLayout.addWidget(self.botaoComprar)
+        self.botaoVender = QtWidgets.QPushButton(self.centralwidget)
+        self.botaoVender.setObjectName("botaoVender")
+        self.horizontalLayout.addWidget(self.botaoVender)
+        self.botaoVender.clicked.connect(
+            lambda: self.switchToVender(telaConsultarPassagem)
+        )
         self.botaoReservar = QtWidgets.QPushButton(self.centralwidget)
         self.botaoReservar.setObjectName("botaoReservar")
         self.horizontalLayout.addWidget(self.botaoReservar)
+        self.botaoReservar.clicked.connect(
+            lambda: self.switchToReservar(telaConsultarPassagem)
+        )
         self.botaoSair = QtWidgets.QPushButton(self.centralwidget)
         self.botaoSair.setObjectName("botaoSair")
         self.horizontalLayout.addWidget(self.botaoSair)
@@ -239,8 +261,8 @@ class Ui_telaConsultarPassagem(object):
         item.setText(_translate("telaConsultarPassagem", "cpf"))
         item = self.tabelaPassagem.horizontalHeaderItem(4)
         item.setText(_translate("telaConsultarPassagem", "numVendas"))
-        self.botaoComprar.setText(_translate(
-            "telaConsultarPassagem", "Comprar"))
+        self.botaoVender.setText(_translate(
+            "telaConsultarPassagem", "Vender"))
         self.botaoReservar.setText(_translate(
             "telaConsultarPassagem", "Reservar"))
         self.botaoSair.setText(_translate("telaConsultarPassagem", "Sair"))

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>telaReservaPassagem</class>
+ <widget class="QMainWindow" name="telaReservaPassagem">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>353</width>
+    <height>259</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>353</width>
+    <height>259</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>353</width>
+    <height>259</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Reservar Passagem</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#telaReservaPassagem
+{
+background-image: url(:/fundos/fundo3.jpg);
+}
+#frame
+{
+border-radius:3px;
+background-color: rgba(165, 180, 222, 180);
+}
+#label
+{
+font: 11pt &quot;Noto Serif Malayalam&quot;;
+color: rgb(3, 33, 43);
+}
+#label_2
+{
+font: 11pt &quot;Noto Serif Malayalam&quot;;
+color: rgb(3, 33, 43);
+}
+
+#label_3
+{
+font: 11pt &quot;Noto Serif Malayalam&quot;;
+	color: rgb(187, 68, 48);
+}
+
+#botaoReservar
+{
+font: 11pt &quot;Noto Serif Malayalam&quot;;
+border-radius:3px;
+background-color: rgb(52, 95, 175);
+}
+
+#botaoReservar:hover
+{
+background-color: rgb(120, 162, 239);
+}
+
+#botaoCancelar
+{
+font: 11pt &quot;Noto Serif Malayalam&quot;;
+border-radius:3px;
+background-color: rgb(52, 95, 175);
+}
+
+#botaoCancelar:hover
+{
+background-color: rgb(120, 162, 239);
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>291</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>231</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Confirmar reserva da passagem:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>90</y>
+       <width>54</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Codigo:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="botaoReservar">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>140</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Reservar</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="botaoCancelar">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>140</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cancelar</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>90</y>
+       <width>141</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>cod</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../recursos/recursos.qrc"/>
+ </resources>
+ <connections/>
+</ui>
