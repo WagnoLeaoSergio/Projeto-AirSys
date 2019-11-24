@@ -8,15 +8,44 @@
 
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QTableWidgetItem
 sys.path.append("../../")
 import views.recursos.recursos_rc
-
+import controles
 
 class Ui_telaGerenciarFuncionario(object):
+    def __init__(self):
+        self.fList = controles.ListaFuncionarios()
+
+    def updateTable(self):
+        self.cData = self.fList.listarFuncionarios()
+        self.numRows = len(self.cData)
+        self.numColumns = 6
+        self.tabelaFuncionario.setRowCount(self.numRows)
+        self.tabelaFuncionario.setColumnCount(self.numColumns)
+        j = 0
+        data = []
+        for i in self.cData:
+            passData = i["element{0}".format(j)]
+            del passData["_id"]
+            data.append((passData["codigo"],
+                         passData["nome"],
+                         passData["numIdentidade"],
+                         str(passData["cpf"]),
+                         passData["email"],
+                         passData["senha"],
+                         ))
+            j = j + 1
+        for row in range(self.numRows):
+            for column in range(self.numColumns):
+                self.tabelaFuncionario.setItem(
+                    row, column, QTableWidgetItem((data[row][column]))
+                )
+
     def switchToRegistrar(self, ui):
         from views.telaInserirFuncionario.telaInserirFuncionario import Ui_telaInserirFuncionario
         self.tela = QtWidgets.QMainWindow()
-        self.registrar = Ui_telaInserirFuncionario()
+        self.registrar = Ui_telaInserirFuncionario(self)
         self.registrar.setupUi(self.tela)
         self.tela.show()
 
@@ -164,7 +193,7 @@ class Ui_telaGerenciarFuncionario(object):
         item = QtWidgets.QTableWidgetItem()
         self.tabelaFuncionario.setHorizontalHeaderItem(4, item)
         self.tabelaFuncionario.horizontalHeader().setVisible(False)
-        self.tabelaFuncionario.horizontalHeader().setDefaultSectionSize(161)
+        self.tabelaFuncionario.horizontalHeader().setDefaultSectionSize(254)
         self.tabelaFuncionario.horizontalHeader().setStretchLastSection(False)
         self.tabelaFuncionario.verticalHeader().setVisible(False)
         self.tabelaFuncionario.verticalHeader().setDefaultSectionSize(65)
@@ -234,6 +263,8 @@ class Ui_telaGerenciarFuncionario(object):
             "telaGerenciarFuncionario", "Alterar"))
         self.botaoSair.setText(_translate(
             "telaGerenciarFuncionario", "Sair"))
+        self.updateTable()
+        self.tabelaFuncionario.setEditTriggers( QtWidgets.QTableWidget.NoEditTriggers)        
 
 
 if __name__ == "__main__":

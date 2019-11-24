@@ -12,6 +12,41 @@ sys.path.append("../../")
 import views.recursos.recursos_rc
 
 class Ui_telaInserirPassagem(object):
+    def __init__(self, gerenciarObj):
+        self.gerenciarObj = gerenciarObj
+
+    def registrar(self):
+        import controles
+        pList = controles.ListaPassagens()
+        nova_Passagem = controles.Passagem()
+        cod = self.campoCodigo.text()
+        if cod == "":
+            print("Por favor insira um codigo para a passagem")
+            return
+        busca = pList.buscarPassagem(cod)
+        if busca is not None:
+            print("Passagem com codigo ja cadastrado")
+            return
+
+        origem = self.campoOrigem.text()
+        destino = self.campoDestino.text()
+        data = self.campoData.text()
+        preco = self.campoPreco.text()
+        assento = self.campoAssento.text()
+        companhia = self.campoCompanhia.text()
+
+        nova_Passagem.setCodigo(cod)
+        nova_Passagem.setOrigem(origem)
+        nova_Passagem.setDestino(destino)
+        nova_Passagem.setData(data)
+        nova_Passagem.setPreco(preco)
+        nova_Passagem.setAssento(assento)
+        nova_Passagem.setCompanhia(companhia)
+
+        msg = pList.registrarPassagem(codigo=cod, passagem=nova_Passagem)
+        print(msg)
+        self.gerenciarObj.updateTable()
+
     def setupUi(self, telaInserirPassagem):
         telaInserirPassagem.setObjectName("telaInserirPassagem")
         telaInserirPassagem.resize(407, 538)
@@ -132,6 +167,7 @@ class Ui_telaInserirPassagem(object):
         self.botaoSubmeter = QtWidgets.QPushButton(self.centralwidget)
         self.botaoSubmeter.setGeometry(QtCore.QRect(140, 500, 121, 31))
         self.botaoSubmeter.setObjectName("botaoSubmeter")
+        self.botaoSubmeter.clicked.connect(self.registrar)
         telaInserirPassagem.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(telaInserirPassagem)
@@ -160,7 +196,7 @@ class Ui_telaInserirPassagem(object):
         self.botaoSubmeter.setText(_translate(
             "telaInserirPassagem", "Submeter"))
 
-
+"""
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     telaInserirPassagem = QtWidgets.QMainWindow()
@@ -168,3 +204,4 @@ if __name__ == "__main__":
     ui.setupUi(telaInserirPassagem)
     telaInserirPassagem.show()
     sys.exit(app.exec_())
+"""

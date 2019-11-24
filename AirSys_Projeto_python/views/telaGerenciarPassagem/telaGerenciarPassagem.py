@@ -17,6 +17,7 @@ import controles
 class Ui_telaGerenciarPassagem(object):
     def __init__(self):
         self.telaAnterior = ""
+        self.pList = controles.ListaPassagens()
 
     def getTelaAnterior(self):
         return self.telaAnterior
@@ -24,10 +25,45 @@ class Ui_telaGerenciarPassagem(object):
     def setTelaAnterior(self, nomeTela):
         self.telaAnterior = nomeTela
 
+    def updateTable(self):
+        self.pData = self.pList.listarPassagens()
+        self.numRows = len(self.pData)
+        self.numColumns = 8
+        self.tabelaPassagem.setRowCount(self.numRows)
+        self.tabelaPassagem.setColumnCount(self.numColumns)
+        j = 0
+        data = []
+        for i in self.pData:
+            passData = i["element{0}".format(j)]
+            del passData["_id"]
+            data.append((passData["codigo"],
+                         passData["origem"],
+                         passData["destino"],
+                         passData["data"],
+                         passData["companhia"],
+                         passData["assento"],
+                         passData["preco"],
+                         passData["dataCompra"]
+                         ))
+            j = j + 1
+        for row in range(self.numRows):
+            for column in range(self.numColumns):
+                self.tabelaPassagem.setItem(
+                    row, column, QTableWidgetItem((data[row][column]))
+                )
+
+    def remover(self):
+        # encotrar indice da linha selecionada:
+        # indexes = self.tabelaPassagem.selectionModel().selectedRows()
+        # remvIndex = indexes[0].row()
+        cod = self.tabelaPassagem.item(self.tabelaPassagem.currentRow(), 0).text()
+        self.pList.removerPassagem(cod)
+        self.updateTable()
+
     def switchToRegistrar(self, ui):
         from views.telaInserirPassagem.telaInserirPassagem import Ui_telaInserirPassagem
         self.tela = QtWidgets.QMainWindow()
-        self.registrar = Ui_telaInserirPassagem()
+        self.registrar = Ui_telaInserirPassagem(self)
         self.registrar.setupUi(self.tela)
         self.tela.show()
 
@@ -192,6 +228,7 @@ class Ui_telaGerenciarPassagem(object):
         self.botaoRemover = QtWidgets.QPushButton(self.centralwidget)
         self.botaoRemover.setObjectName("botaoRemover")
         self.horizontalLayout.addWidget(self.botaoRemover)
+        self.botaoRemover.clicked.connect(self.remover)
         self.botaoAlterar = QtWidgets.QPushButton(self.centralwidget)
         self.botaoAlterar.setObjectName("botaoAlterar")
         self.horizontalLayout.addWidget(self.botaoAlterar)
@@ -211,7 +248,7 @@ class Ui_telaGerenciarPassagem(object):
     def retranslateUi(self, telaGerenciarPassagem):
         _translate = QtCore.QCoreApplication.translate
         telaGerenciarPassagem.setWindowTitle(
-            _translate("telaGerenciarPassagem", "AirSys - Menu"))
+            _translate("telaGerenciarPassagem", "AirSys - Gerenciar Passsagem"))
         item = self.tabelaPassagem.verticalHeaderItem(0)
         item.setText(_translate("telaGerenciarPassagem", "New Row"))
         item = self.tabelaPassagem.verticalHeaderItem(1)
@@ -245,33 +282,7 @@ class Ui_telaGerenciarPassagem(object):
         self.botaoAlterar.setText(_translate(
             "telaGerenciarPassagem", "Alterar"))
         self.botaoSair.setText(_translate("telaGerenciarPassagem", "Sair"))
-        self.pList = controles.ListaPassagens()
-        self.pData = self.pList.listarPassagens()
-        self.numRows = len(self.pData)
-        self.numColumns = 8
-        self.tabelaPassagem.setRowCount(self.numRows)
-        self.tabelaPassagem.setColumnCount(self.numColumns)
-        j = 0
-        data = []
-        for i in self.pData:
-            passData = i["element{0}".format(j)]
-            del passData["_id"]
-            data.append((passData["codigo"],
-                         passData["origem"],
-                         passData["destino"],
-                         passData["data"],
-                         passData["companhia"],
-                         passData["assento"],
-                         passData["preco"],
-                         passData["dataCompra"]
-                         ))
-            j = j + 1
-        print(self.pData)
-        for row in range(self.numRows):
-            for column in range(self.numColumns):
-                self.tabelaPassagem.setItem(
-                    row, column, QTableWidgetItem((data[row][column]))
-                )
+        self.updateTable()
         self.tabelaPassagem.setEditTriggers( QtWidgets.QTableWidget.NoEditTriggers)
 
 

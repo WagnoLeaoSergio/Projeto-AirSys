@@ -8,8 +8,10 @@
 
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QTableWidgetItem
 sys.path.append("../../")
 import views.recursos.recursos_rc
+import controles
 
 
 class Ui_telaConsultarPassagem(object):
@@ -21,6 +23,34 @@ class Ui_telaConsultarPassagem(object):
 
     def setTelaAnterior(self, nomeTela):
         self.telaAnterior = nomeTela
+
+    def updateTable(self):
+        self.pList = controles.ListaPassagens()
+        self.pData = self.pList.listarPassagens()
+        self.numRows = len(self.pData)
+        self.numColumns = 8
+        self.tabelaPassagem.setRowCount(self.numRows)
+        self.tabelaPassagem.setColumnCount(self.numColumns)
+        j = 0
+        data = []
+        for i in self.pData:
+            passData = i["element{0}".format(j)]
+            del passData["_id"]
+            data.append((passData["codigo"],
+                         passData["origem"],
+                         passData["destino"],
+                         passData["data"],
+                         passData["companhia"],
+                         passData["assento"],
+                         passData["preco"],
+                         passData["dataCompra"]
+                         ))
+            j = j + 1
+        for row in range(self.numRows):
+            for column in range(self.numColumns):
+                self.tabelaPassagem.setItem(
+                    row, column, QTableWidgetItem((data[row][column]))
+                )
 
     def switchSair(self, ui):
         from views.telaOpcoesPassagem.telaOpcoesPassagem import Ui_telaOpcoesPassagem
@@ -182,7 +212,7 @@ class Ui_telaConsultarPassagem(object):
     def retranslateUi(self, telaConsultarPassagem):
         _translate = QtCore.QCoreApplication.translate
         telaConsultarPassagem.setWindowTitle(
-            _translate("telaConsultarPassagem", "AirSys - Menu"))
+            _translate("telaConsultarPassagem", "AirSys - COnsultar Passagem"))
         item = self.tabelaPassagem.verticalHeaderItem(0)
         item.setText(_translate("telaConsultarPassagem", "New Row"))
         item = self.tabelaPassagem.verticalHeaderItem(1)
@@ -214,6 +244,8 @@ class Ui_telaConsultarPassagem(object):
         self.botaoReservar.setText(_translate(
             "telaConsultarPassagem", "Reservar"))
         self.botaoSair.setText(_translate("telaConsultarPassagem", "Sair"))
+        self.updateTable()
+        self.tabelaPassagem.setEditTriggers( QtWidgets.QTableWidget.NoEditTriggers)
 
 
 if __name__ == "__main__":

@@ -10,8 +10,40 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 sys.path.append("../../")
 import views.recursos.recursos_rc
+import controles
 
 class Ui_telaInserirCliente(object):
+    def __init__(self, gerenciarObj):
+        self.gerenciarObj = gerenciarObj
+
+    def registrar(self):
+        import controles
+        cList = controles.ListaClientes()
+        novo_cliente = controles.Cliente()
+        cod = self.campoCodigo.text()
+        if cod == "":
+            print("Por favor insira um codigo para o cliente")
+            return
+        busca = cList.buscarCliente(cod)
+        if busca is not None:
+            print("Cliente com codigo ja cadastrado")
+            return
+
+        nome = self.campoNome.text()
+        numId = self.campoID.text()
+        cpf = self.campoCPF.text()
+        email = self.campoEmail.text()
+        banco = self.campoBanco.text()
+        novo_cliente.setCodigo(cod)
+        novo_cliente.setNome(nome)
+        novo_cliente.setNumIdetidade(numId)
+        novo_cliente.setCPF(cpf)
+        novo_cliente.setEmail(email)
+        novo_cliente.setBanco(banco)
+        msg = cList.registrarCliente(codigo=cod, cliente=novo_cliente)
+        print(msg)
+        self.gerenciarObj.updateTable()
+
     def setupUi(self, telaInserirCliente):
         telaInserirCliente.setObjectName("telaInserirCliente")
         telaInserirCliente.resize(407, 538)
@@ -121,6 +153,7 @@ class Ui_telaInserirCliente(object):
         self.botaoSubmeter = QtWidgets.QPushButton(self.centralwidget)
         self.botaoSubmeter.setGeometry(QtCore.QRect(140, 500, 121, 31))
         self.botaoSubmeter.setObjectName("botaoSubmeter")
+        self.botaoSubmeter.clicked.connect(self.registrar)
         telaInserirCliente.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(telaInserirCliente)
@@ -129,7 +162,7 @@ class Ui_telaInserirCliente(object):
     def retranslateUi(self, telaInserirCliente):
         _translate = QtCore.QCoreApplication.translate
         telaInserirCliente.setWindowTitle(
-            _translate("telaInserirCliente", "MainWindow"))
+            _translate("telaInserirCliente", "Inserir Cliente"))
         self.campoCodigo.setPlaceholderText(
             _translate("telaInserirCliente", "CODIGO"))
         self.campoNome.setPlaceholderText(
@@ -147,7 +180,7 @@ class Ui_telaInserirCliente(object):
         self.botaoSubmeter.setText(_translate(
             "telaInserirCliente", "Submeter"))
 
-
+"""
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     telaInserirCliente = QtWidgets.QMainWindow()
@@ -155,3 +188,4 @@ if __name__ == "__main__":
     ui.setupUi(telaInserirCliente)
     telaInserirCliente.show()
     sys.exit(app.exec_())
+"""

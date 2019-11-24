@@ -8,22 +8,32 @@ class Pessoa(object):
         self.__codigo = "00000"
         self.__nome = "sem nome"
         self.__numIdentidade = "sem numero de indentidade"
-        self.__cpf = None
+        self.__cpf = "000.000.000-00"
         self.__email = "sem email"
 
     def setCodigo(self, codigo):
+        if codigo == "":
+            return
         self.__codigo = codigo
 
     def setNome(self, nome):
+        if nome == "":
+            return
         self.__nome = nome
 
     def setNumIdetidade(self, numIdentidade):
+        if numIdentidade == "":
+            return
         self.__numIdentidade = numIdentidade
 
     def setCPF(self, cpf):
+        if cpf == "":
+            return
         self.__cpf = cpf
 
     def setEmail(self, email):
+        if email == "":
+            return
         self.__email = email
 
     def getCodigo(self):
@@ -72,11 +82,11 @@ class Funcionario(Pessoa):
 
     def __init__(self):
         Pessoa.__init__(self)
-        self.__numDeVendas = 0
+        self.__numDeVendas = "0"
         self.__senha = 0
 
     def setNumDeVendas(self, numvendas):
-        if numvendas < 0:
+        if int(numvendas) < 0:
             return "ERRO! NUMERO INVALIDO"
         else:
             self.__numDeVendas = numvendas
@@ -99,6 +109,8 @@ class Cliente(Pessoa):
         self.__banco = "sem banco"
 
     def setBanco(self, banco):
+        if banco == "":
+            return
         self.__banco = banco
 
     def getBanco(self):
@@ -116,31 +128,45 @@ class Passagem():
         self.__companhia = "sem companhia"
         self.__assento = "assento nao selecionado"
         self.__estado = " nulo "
-        self.__preco = 0.0
+        self.__preco = "0.0"
         self.__dataCompra = "sem data de compra"
 
     def setCodigo(self, codigo):
+        if codigo == "":
+            return
         self.__codigo = codigo
 
     def setOrigem(self, origem):
+        if origem == "":
+            return
         self.__origem = origem
 
     def setDestino(self, destino):
+        if destino == "":
+            return
         self.__destino = destino
 
     def setData(self, data):
+        if data == "":
+            return
         self.__data = data
 
     def setCompanhia(self, companhia):
+        if companhia == "":
+            return
         self.__companhia = companhia
 
     def setAssento(self, assento):
+        if assento == "":
+            return
         self.__assento = assento
 
     def setEstado(self, estado):
         self.__estado = estado
 
     def setPreco(self, preco):
+        if preco == "":
+            return
         self.__preco = preco
 
     def setDataCompra(self, dataCompra):

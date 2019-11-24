@@ -8,13 +8,15 @@
 
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QTableWidgetItem
 sys.path.append("../../")
 import views.recursos.recursos_rc
-
+import controles
 
 class Ui_telaGerenciarCliente:
     def __init__(self):
         self.telaAnterior = ""
+        self.cList = controles.ListaClientes()
 
     def getTelaAnterior(self):
         return self.telaAnterior
@@ -22,12 +24,46 @@ class Ui_telaGerenciarCliente:
     def setTelaAnterior(self, nomeTela):
         self.telaAnterior = nomeTela
 
+    def updateTable(self):
+        self.cData = self.cList.listarClientes()
+        self.numRows = len(self.cData)
+        self.numColumns = 6
+        self.tabelaCliente.setRowCount(self.numRows)
+        self.tabelaCliente.setColumnCount(self.numColumns)
+        j = 0
+        data = []
+        for i in self.cData:
+            passData = i["element{0}".format(j)]
+            del passData["_id"]
+            data.append((passData["codigo"],
+                         passData["nome"],
+                         passData["numIdentidade"],
+                         str(passData["cpf"]),
+                         passData["email"],
+                         passData["banco"],
+                         ))
+            j = j + 1
+        for row in range(self.numRows):
+            for column in range(self.numColumns):
+                self.tabelaCliente.setItem(
+                    row, column, QTableWidgetItem((data[row][column]))
+                )
+    def remover(self):
+        # encotrar indice da linha selecionada:
+        # indexes = self.tabelaCliente.selectionModel().selectedRows()
+        # remvIndex = indexes[0].row()
+        cod = self.tabelaCliente.item(self.tabelaCliente.currentRow(), 0).text()
+        self.cList.removerCliente(cod)
+        self.updateTable()
+
+
     def switchToRegistrar(self, ui):
         from views.telaInserirCliente.telaInserirCliente import Ui_telaInserirCliente
         self.tela = QtWidgets.QMainWindow()
-        self.registrar = Ui_telaInserirCliente()
+        self.registrar = Ui_telaInserirCliente(self)
         self.registrar.setupUi(self.tela)
         self.tela.show()
+        self.updateTable()
 
     def switchSair(self, ui):
         if self.telaAnterior == "Funcionario":
@@ -181,7 +217,7 @@ class Ui_telaGerenciarCliente:
         item = QtWidgets.QTableWidgetItem()
         self.tabelaCliente.setHorizontalHeaderItem(4, item)
         self.tabelaCliente.horizontalHeader().setVisible(False)
-        self.tabelaCliente.horizontalHeader().setDefaultSectionSize(161)
+        self.tabelaCliente.horizontalHeader().setDefaultSectionSize(264)
         self.tabelaCliente.horizontalHeader().setStretchLastSection(False)
         self.tabelaCliente.verticalHeader().setVisible(False)
         self.tabelaCliente.verticalHeader().setDefaultSectionSize(65)
@@ -197,6 +233,7 @@ class Ui_telaGerenciarCliente:
         self.botaoRemover = QtWidgets.QPushButton(self.centralwidget)
         self.botaoRemover.setObjectName("botaoRemover")
         self.horizontalLayout.addWidget(self.botaoRemover)
+        self.botaoRemover.clicked.connect(self.remover)
         self.botaoAlterar = QtWidgets.QPushButton(self.centralwidget)
         self.botaoAlterar.setObjectName("botaoAlterar")
         self.horizontalLayout.addWidget(self.botaoAlterar)
@@ -250,6 +287,8 @@ class Ui_telaGerenciarCliente:
         self.botaoAlterar.setText(_translate(
             "telaGerenciarCliente", "Alterar"))
         self.botaoSair.setText(_translate("telaGerenciarCliente", "Sair"))
+        self.updateTable()
+        self.tabelaCliente.setEditTriggers( QtWidgets.QTableWidget.NoEditTriggers)
 
 
 if __name__ == "__main__":

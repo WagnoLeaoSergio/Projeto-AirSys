@@ -39,9 +39,18 @@ class InterfaceListaEntidade:
 
     @staticmethod
     def _removerEntidade(codigoEntidade, nomeEntidade, listaEntidades,
-                         dbEntidades, objEntidade):
-        if objEntidade is not None and codigoEntidade != objEntidade.getCodigo():
-            return "ERRO! Codigo recebido e codigo do objeto diferentes"
+                         dbEntidades):
+
+        objEntidade = InterfaceListaEntidade._buscarEntidade(
+            codigoEntidade=codigoEntidade,
+            nomeEntidade=nomeEntidade,
+            listaEntidades=listaEntidades,
+            dbEntidades=dbEntidades,
+            objEntidade=None
+        )
+
+        if objEntidade is None:
+            return None
 
         checkEntidade = dbEntidades.find_one(
             {'codigo': codigoEntidade}
@@ -250,7 +259,6 @@ class ListaGerentes:
             nomeEntidade="Gerente",
             listaEntidades=self.__gerentes,
             dbEntidades=self.dbGerentes,
-            objEntidade=gerente
         )
 
         return result
@@ -318,7 +326,6 @@ class ListaFuncionarios:
             nomeEntidade="Funcionario",
             listaEntidades=self.__funcionarios,
             dbEntidades=self.dbFuncionarios,
-            objEntidade=funcionario
         )
 
         return result
@@ -389,7 +396,6 @@ class ListaClientes:
             nomeEntidade="Cliente",
             listaEntidades=self.__clientes,
             dbEntidades=self.dbClientes,
-            objEntidade=cliente
         )
 
         return result
@@ -458,11 +464,10 @@ class ListaPassagens:
 
     def removerPassagem(self, codigo, passagem=None):
         result = InterfaceListaEntidade._removerEntidade(
-            codigo=codigo,
+            codigoEntidade=codigo,
             nomeEntidade="Passagem",
             listaEntidades=self.__passagens,
             dbEntidades=self.dbPassagens,
-            objEntidade=passagem
         )
 
         return result

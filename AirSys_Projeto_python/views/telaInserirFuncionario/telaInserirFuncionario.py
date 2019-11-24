@@ -13,6 +13,37 @@ import views.recursos.recursos_rc
 
 
 class Ui_telaInserirFuncionario(object):
+    def __init__(self, gerenciarObj):
+        self.gerenciarObj = gerenciarObj
+
+    def registrar(self):
+        import controles
+        fList = controles.ListaFuncionarios()
+        novo_funcionario = controles.Funcionario()
+        cod = self.campoCodigo.text()
+        if cod == "":
+            print("Por favor insira um codigo para o funcionario")
+            return
+        busca = fList.buscarFuncionario(cod)
+        if busca is not None:
+            print("Funcionario com codigo ja cadastrado")
+            return
+
+        nome = self.campoNome.text()
+        numId = self.campoID.text()
+        cpf = self.campoCPF.text()
+        email = self.campoEmail.text()
+        campoSenha = self.campoSenha.text()
+        novo_funcionario.setCodigo(cod)
+        novo_funcionario.setNome(nome)
+        novo_funcionario.setNumIdetidade(numId)
+        novo_funcionario.setCPF(cpf)
+        novo_funcionario.setEmail(email)
+        novo_funcionario.setSenha(campoSenha)
+        msg = fList.registrarFuncionario(codigo=cod, funcionario=novo_funcionario)
+        print(msg)
+        self.gerenciarObj.updateTable()
+
     def setupUi(self, telaInserirFuncionario):
         telaInserirFuncionario.setObjectName("telaInserirFuncionario")
         telaInserirFuncionario.resize(407, 538)
@@ -62,7 +93,7 @@ class Ui_telaInserirFuncionario(object):
                                              "background-color: rgba(37, 128, 197, 150);\n"
                                              "}\n"
                                              "\n"
-                                             "#campoBanco\n"
+                                             "#campoSenha\n"
                                              "{\n"
                                              "color: rgb(243, 234, 225);\n"
                                              "background-color: rgba(37, 128, 197, 150);\n"
@@ -111,9 +142,9 @@ class Ui_telaInserirFuncionario(object):
         self.campoEmail = QtWidgets.QLineEdit(self.verticalLayoutWidget)
         self.campoEmail.setObjectName("campoEmail")
         self.verticalLayout.addWidget(self.campoEmail)
-        self.campoBanco = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.campoBanco.setObjectName("campoBanco")
-        self.verticalLayout.addWidget(self.campoBanco)
+        self.campoSenha = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.campoSenha.setObjectName("campoSenha")
+        self.verticalLayout.addWidget(self.campoSenha)
         self.labelInfo = QtWidgets.QLabel(self.frameDados)
         self.labelInfo.setGeometry(QtCore.QRect(0, 20, 331, 31))
         self.labelInfo.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -122,6 +153,7 @@ class Ui_telaInserirFuncionario(object):
         self.botaoSubmeter = QtWidgets.QPushButton(self.centralwidget)
         self.botaoSubmeter.setGeometry(QtCore.QRect(140, 500, 121, 31))
         self.botaoSubmeter.setObjectName("botaoSubmeter")
+        self.botaoSubmeter.clicked.connect(self.registrar)
         telaInserirFuncionario.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(telaInserirFuncionario)
@@ -141,14 +173,14 @@ class Ui_telaInserirFuncionario(object):
             _translate("telaInserirFuncionario", "CPF"))
         self.campoEmail.setPlaceholderText(
             _translate("telaInserirFuncionario", "EMAIL"))
-        self.campoBanco.setPlaceholderText(
+        self.campoSenha.setPlaceholderText(
             _translate("telaInserirFuncionario", "SENHA"))
         self.labelInfo.setText(_translate(
             "telaInserirFuncionario", "Insira aqui os dados do funcionário"))
         self.botaoSubmeter.setText(_translate(
             "telaInserirFuncionario", "Submeter"))
 
-
+"""
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     telaInserirFuncionario = QtWidgets.QMainWindow()
@@ -156,3 +188,4 @@ if __name__ == "__main__":
     ui.setupUi(telaInserirFuncionario)
     telaInserirFuncionario.show()
     sys.exit(app.exec_())
+"""
