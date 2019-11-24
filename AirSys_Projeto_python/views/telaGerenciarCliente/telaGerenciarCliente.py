@@ -11,90 +11,123 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 sys.path.append("../../")
 import views.recursos.recursos_rc
 
-class Ui_telaOpcoesCliente(object):
-    def setupUi(self, telaOpcoesCliente):
-        telaOpcoesCliente.setObjectName("telaOpcoesCliente")
-        telaOpcoesCliente.resize(829, 567)
-        telaOpcoesCliente.setStyleSheet("#telaOpcoesCliente\n"
-                                        "{\n"
-                                        "background-image: url(:/fundos/fundo3.jpg);\n"
-                                        "}\n"
-                                        "\n"
-                                        "#tabelaCliente\n"
-                                        "{\n"
-                                        "border-radius: 10px;\n"
-                                        "background-color: rgba(239, 230, 221, 150);\n"
-                                        "}\n"
-                                        "\n"
-                                        "#frameListaOpcoes\n"
-                                        "{\n"
-                                        "border-radius: 10px;\n"
-                                        "background-color: rgba(239, 230, 221, 150);\n"
-                                        "}\n"
-                                        "\n"
-                                        "#listaOpcoes\n"
-                                        "{\n"
-                                        "font: 15pt \"MathJax_Size1\";\n"
-                                        "background-color: rgb(255, 255, 255, 0);\n"
-                                        "}\n"
-                                        "\n"
-                                        "#botaoVoltar\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "color: rgb(243, 223, 162);\n"
-                                        "background-color: rgb(3, 37, 108);\n"
-                                        "}\n"
-                                        "#botaoVoltar:hover\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "background-color: #6E8898;\n"
-                                        "}\n"
-                                        "\n"
-                                        "#botaoInserir\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "color: rgb(3, 37, 108);\n"
-                                        "background-color: #9FB1BC;\n"
-                                        "}\n"
-                                        "#botaoInserir:hover\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "background-color: #6E8898;\n"
-                                        "}\n"
-                                        "\n"
-                                        "\n"
-                                        "#botaoRemover\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "color: rgb(3, 37, 108);\n"
-                                        "background-color: #9FB1BC;\n"
-                                        "}\n"
-                                        "#botaoRemover:hover\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "background-color: #6E8898;\n"
-                                        "}\n"
-                                        "\n"
-                                        "#botaoAlterar\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "color: rgb(3, 37, 108);\n"
-                                        "background-color: #9FB1BC;\n"
-                                        "}\n"
-                                        "#botaoAlterar:hover\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "background-color: #6E8898;\n"
-                                        "}")
-        self.centralwidget = QtWidgets.QWidget(telaOpcoesCliente)
+
+class Ui_telaGerenciarCliente:
+    def __init__(self):
+        self.telaAnterior = ""
+
+    def getTelaAnterior(self):
+        return self.telaAnterior
+
+    def setTelaAnterior(self, nomeTela):
+        self.telaAnterior = nomeTela
+
+    def switchToRegistrar(self, ui):
+        from views.telaInserirCliente.telaInserirCliente import Ui_telaInserirCliente
+        self.tela = QtWidgets.QMainWindow()
+        self.registrar = Ui_telaInserirCliente()
+        self.registrar.setupUi(self.tela)
+        self.tela.show()
+
+    def switchSair(self, ui):
+        if self.telaAnterior == "Funcionario":
+            from views.telaMenuFuncionario.telaOpcoesFuncionario import Ui_telaOpcoesFuncionario
+            tela = QtWidgets.QMainWindow()
+            menuFuncionario = Ui_telaOpcoesFuncionario()
+            menuFuncionario.setupUi(tela)
+            ui.hide()
+            tela.show()
+        elif self.telaAnterior == "Gerente":
+            from views.telaMenuGerente.telaMenuGerente import Ui_telaOpcoesGerente                
+            tela = QtWidgets.QMainWindow()
+            menuGerente = Ui_telaOpcoesGerente()
+            menuGerente.setupUi(tela)
+            ui.hide()
+            tela.show()
+
+    def setupUi(self, telaGerenciarCliente):
+        telaGerenciarCliente.setObjectName("telaGerenciarCliente")
+        telaGerenciarCliente.resize(829, 567)
+        telaGerenciarCliente.setStyleSheet("#telaGerenciarCliente\n"
+                                           "{\n"
+                                           "background-image: url(:/fundos/fundo3.jpg);\n"
+                                           "}\n"
+                                           "\n"
+                                           "#tabelaCliente\n"
+                                           "{\n"
+                                           "border-radius: 10px;\n"
+                                           "background-color: rgba(239, 230, 221, 150);\n"
+                                           "}\n"
+                                           "\n"
+                                           "#frameListaOpcoes\n"
+                                           "{\n"
+                                           "border-radius: 10px;\n"
+                                           "background-color: rgba(239, 230, 221, 150);\n"
+                                           "}\n"
+                                           "\n"
+                                           "#listaOpcoes\n"
+                                           "{\n"
+                                           "font: 15pt \"MathJax_Size1\";\n"
+                                           "background-color: rgb(255, 255, 255, 0);\n"
+                                           "}\n"
+                                           "\n"
+                                           "#botaoSair\n"
+                                           "{\n"
+                                           "font: 14pt \"Bitstream Vera Sans\";\n"
+                                           "border-radius:9px;\n"
+                                           "color: rgb(243, 223, 162);\n"
+                                           "background-color: rgb(3, 37, 108);\n"
+                                           "}\n"
+                                           "#botaoSair:hover\n"
+                                           "{\n"
+                                           "font: 14pt \"Bitstream Vera Sans\";\n"
+                                           "border-radius:9px;\n"
+                                           "background-color: #6E8898;\n"
+                                           "}\n"
+                                           "\n"
+                                           "#botaoRegistrar\n"
+                                           "{\n"
+                                           "font: 14pt \"Bitstream Vera Sans\";\n"
+                                           "border-radius:9px;\n"
+                                           "color: rgb(3, 37, 108);\n"
+                                           "background-color: #9FB1BC;\n"
+                                           "}\n"
+                                           "#botaoRegistrar:hover\n"
+                                           "{\n"
+                                           "font: 14pt \"Bitstream Vera Sans\";\n"
+                                           "border-radius:9px;\n"
+                                           "background-color: #6E8898;\n"
+                                           "}\n"
+                                           "\n"
+                                           "\n"
+                                           "#botaoRemover\n"
+                                           "{\n"
+                                           "font: 14pt \"Bitstream Vera Sans\";\n"
+                                           "border-radius:9px;\n"
+                                           "color: rgb(3, 37, 108);\n"
+                                           "background-color: #9FB1BC;\n"
+                                           "}\n"
+                                           "#botaoRemover:hover\n"
+                                           "{\n"
+                                           "font: 14pt \"Bitstream Vera Sans\";\n"
+                                           "border-radius:9px;\n"
+                                           "background-color: #6E8898;\n"
+                                           "}\n"
+                                           "\n"
+                                           "#botaoAlterar\n"
+                                           "{\n"
+                                           "font: 14pt \"Bitstream Vera Sans\";\n"
+                                           "border-radius:9px;\n"
+                                           "color: rgb(3, 37, 108);\n"
+                                           "background-color: #9FB1BC;\n"
+                                           "}\n"
+                                           "#botaoAlterar:hover\n"
+                                           "{\n"
+                                           "font: 14pt \"Bitstream Vera Sans\";\n"
+                                           "border-radius:9px;\n"
+                                           "background-color: #6E8898;\n"
+                                           "}")
+        self.centralwidget = QtWidgets.QWidget(telaGerenciarCliente)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
@@ -155,65 +188,74 @@ class Ui_telaOpcoesCliente(object):
         self.verticalLayout.addWidget(self.tabelaCliente)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.botaoInserir = QtWidgets.QPushButton(self.centralwidget)
-        self.botaoInserir.setObjectName("botaoInserir")
-        self.horizontalLayout.addWidget(self.botaoInserir)
+        self.botaoRegistrar = QtWidgets.QPushButton(self.centralwidget)
+        self.botaoRegistrar.setObjectName("botaoRegistrar")
+        self.botaoRegistrar.clicked.connect(
+            lambda: self.switchToRegistrar(telaGerenciarCliente)
+        )
+        self.horizontalLayout.addWidget(self.botaoRegistrar)
         self.botaoRemover = QtWidgets.QPushButton(self.centralwidget)
         self.botaoRemover.setObjectName("botaoRemover")
         self.horizontalLayout.addWidget(self.botaoRemover)
         self.botaoAlterar = QtWidgets.QPushButton(self.centralwidget)
         self.botaoAlterar.setObjectName("botaoAlterar")
         self.horizontalLayout.addWidget(self.botaoAlterar)
-        self.botaoVoltar = QtWidgets.QPushButton(self.centralwidget)
-        self.botaoVoltar.setObjectName("botaoVoltar")
-        self.horizontalLayout.addWidget(self.botaoVoltar)
+        self.botaoSair = QtWidgets.QPushButton(self.centralwidget)
+        self.botaoSair.setObjectName("botaoSair")
+        self.botaoSair.clicked.connect(
+            lambda: self.switchSair(telaGerenciarCliente)
+        )
+        self.horizontalLayout.addWidget(self.botaoSair)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
-        telaOpcoesCliente.setCentralWidget(self.centralwidget)
+        telaGerenciarCliente.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(telaOpcoesCliente)
-        QtCore.QMetaObject.connectSlotsByName(telaOpcoesCliente)
+        self.retranslateUi(telaGerenciarCliente)
+        QtCore.QMetaObject.connectSlotsByName(telaGerenciarCliente)
 
-    def retranslateUi(self, telaOpcoesCliente):
+    def retranslateUi(self, telaGerenciarCliente):
         _translate = QtCore.QCoreApplication.translate
-        telaOpcoesCliente.setWindowTitle(
-            _translate("telaOpcoesCliente", "AirSys - Menu"))
+        telaGerenciarCliente.setWindowTitle(
+            _translate("telaGerenciarCliente", "AirSys - Menu"))
         item = self.tabelaCliente.verticalHeaderItem(0)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarCliente", "New Row"))
         item = self.tabelaCliente.verticalHeaderItem(1)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarCliente", "New Row"))
         item = self.tabelaCliente.verticalHeaderItem(2)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarCliente", "New Row"))
         item = self.tabelaCliente.verticalHeaderItem(3)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarCliente", "New Row"))
         item = self.tabelaCliente.verticalHeaderItem(4)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarCliente", "New Row"))
         item = self.tabelaCliente.verticalHeaderItem(5)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarCliente", "New Row"))
         item = self.tabelaCliente.verticalHeaderItem(6)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarCliente", "New Row"))
         item = self.tabelaCliente.verticalHeaderItem(7)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarCliente", "New Row"))
         item = self.tabelaCliente.horizontalHeaderItem(0)
-        item.setText(_translate("telaOpcoesCliente", "New Column"))
+        item.setText(_translate("telaGerenciarCliente", "New Column"))
         item = self.tabelaCliente.horizontalHeaderItem(1)
-        item.setText(_translate("telaOpcoesCliente", "codigo"))
+        item.setText(_translate("telaGerenciarCliente", "codigo"))
         item = self.tabelaCliente.horizontalHeaderItem(2)
-        item.setText(_translate("telaOpcoesCliente", "nome"))
+        item.setText(_translate("telaGerenciarCliente", "nome"))
         item = self.tabelaCliente.horizontalHeaderItem(3)
-        item.setText(_translate("telaOpcoesCliente", "cpf"))
+        item.setText(_translate("telaGerenciarCliente", "cpf"))
         item = self.tabelaCliente.horizontalHeaderItem(4)
-        item.setText(_translate("telaOpcoesCliente", "numVendas"))
-        self.botaoInserir.setText(_translate("telaOpcoesCliente", "Inserir"))
-        self.botaoRemover.setText(_translate("telaOpcoesCliente", "Remover"))
-        self.botaoAlterar.setText(_translate("telaOpcoesCliente", "Alterar"))
-        self.botaoVoltar.setText(_translate("telaOpcoesCliente", "Sair"))
+        item.setText(_translate("telaGerenciarCliente", "numVendas"))
+        self.botaoRegistrar.setText(_translate(
+            "telaGerenciarCliente", "Registrar"))
+        self.botaoRemover.setText(_translate(
+            "telaGerenciarCliente", "Remover"))
+        self.botaoAlterar.setText(_translate(
+            "telaGerenciarCliente", "Alterar"))
+        self.botaoSair.setText(_translate("telaGerenciarCliente", "Sair"))
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    telaOpcoesCliente = QtWidgets.QMainWindow()
-    ui = Ui_telaOpcoesCliente()
-    ui.setupUi(telaOpcoesCliente)
-    telaOpcoesCliente.show()
+    telaGerenciarCliente = QtWidgets.QMainWindow()
+    ui = Ui_telaGerenciarCliente()
+    ui.setupUi(telaGerenciarCliente)
+    telaGerenciarCliente.show()
     sys.exit(app.exec_())

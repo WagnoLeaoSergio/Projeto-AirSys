@@ -14,90 +14,115 @@ import views.recursos.recursos_rc
 import controles
 
 
-class Ui_telaOpcoesCliente(object):
-    def setupUi(self, telaOpcoesCliente):
-        telaOpcoesCliente.setObjectName("telaOpcoesCliente")
-        telaOpcoesCliente.resize(829, 567)
-        telaOpcoesCliente.setStyleSheet("#telaOpcoesCliente\n"
-                                        "{\n"
-                                        "background-image: url(:/fundos/fundo3.jpg);\n"
-                                        "}\n"
-                                        "\n"
-                                        "#tabelaPassagem\n"
-                                        "{\n"
-                                        "border-radius: 10px;\n"
-                                        "background-color: rgba(239, 230, 221, 150);\n"
-                                        "}\n"
-                                        "\n"
-                                        "#frameListaOpcoes\n"
-                                        "{\n"
-                                        "border-radius: 10px;\n"
-                                        "background-color: rgba(239, 230, 221, 150);\n"
-                                        "}\n"
-                                        "\n"
-                                        "#listaOpcoes\n"
-                                        "{\n"
-                                        "font: 15pt \"MathJax_Size1\";\n"
-                                        "background-color: rgb(255, 255, 255, 0);\n"
-                                        "}\n"
-                                        "\n"
-                                        "#botaoVoltar\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "color: rgb(243, 223, 162);\n"
-                                        "background-color: rgb(3, 37, 108);\n"
-                                        "}\n"
-                                        "#botaoVoltar:hover\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "background-color: #6E8898;\n"
-                                        "}\n"
-                                        "\n"
-                                        "#botaoInserir\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "color: rgb(3, 37, 108);\n"
-                                        "background-color: #9FB1BC;\n"
-                                        "}\n"
-                                        "#botaoInserir:hover\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "background-color: #6E8898;\n"
-                                        "}\n"
-                                        "\n"
-                                        "\n"
-                                        "#botaoRemover\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "color: rgb(3, 37, 108);\n"
-                                        "background-color: #9FB1BC;\n"
-                                        "}\n"
-                                        "#botaoRemover:hover\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "background-color: #6E8898;\n"
-                                        "}\n"
-                                        "\n"
-                                        "#botaoAlterar\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "color: rgb(3, 37, 108);\n"
-                                        "background-color: #9FB1BC;\n"
-                                        "}\n"
-                                        "#botaoAlterar:hover\n"
-                                        "{\n"
-                                        "font: 14pt \"Bitstream Vera Sans\";\n"
-                                        "border-radius:9px;\n"
-                                        "background-color: #6E8898;\n"
-                                        "}")
-        self.centralwidget = QtWidgets.QWidget(telaOpcoesCliente)
+class Ui_telaGerenciarPassagem(object):
+    def __init__(self):
+        self.telaAnterior = ""
+
+    def getTelaAnterior(self):
+        return self.telaAnterior
+
+    def setTelaAnterior(self, nomeTela):
+        self.telaAnterior = nomeTela
+
+    def switchToRegistrar(self, ui):
+        from views.telaInserirPassagem.telaInserirPassagem import Ui_telaInserirPassagem
+        self.tela = QtWidgets.QMainWindow()
+        self.registrar = Ui_telaInserirPassagem()
+        self.registrar.setupUi(self.tela)
+        self.tela.show()
+
+    def switchSair(self, ui):
+        from views.telaOpcoesPassagem.telaOpcoesPassagem import Ui_telaOpcoesPassagem
+        self.tela = QtWidgets.QMainWindow()
+        self.opPassagem = Ui_telaOpcoesPassagem()
+        self.opPassagem.setupUi(self.tela)
+        self.opPassagem.setTelaAnterior(self.telaAnterior)
+        ui.hide()
+        self.tela.show()
+
+    def setupUi(self, telaGerenciarPassagem):
+        telaGerenciarPassagem.setObjectName("telaGerenciarPassagem")
+        telaGerenciarPassagem.resize(829, 567)
+        telaGerenciarPassagem.setStyleSheet("#telaGerenciarPassagem\n"
+                                            "{\n"
+                                            "background-image: url(:/fundos/fundo3.jpg);\n"
+                                            "}\n"
+                                            "\n"
+                                            "#tabelaPassagem\n"
+                                            "{\n"
+                                            "border-radius: 10px;\n"
+                                            "background-color: rgba(239, 230, 221, 150);\n"
+                                            "}\n"
+                                            "\n"
+                                            "#frameListaOpcoes\n"
+                                            "{\n"
+                                            "border-radius: 10px;\n"
+                                            "background-color: rgba(239, 230, 221, 150);\n"
+                                            "}\n"
+                                            "\n"
+                                            "#listaOpcoes\n"
+                                            "{\n"
+                                            "font: 15pt \"MathJax_Size1\";\n"
+                                            "background-color: rgb(255, 255, 255, 0);\n"
+                                            "}\n"
+                                            "\n"
+                                            "#botaoSair\n"
+                                            "{\n"
+                                            "font: 14pt \"Bitstream Vera Sans\";\n"
+                                            "border-radius:9px;\n"
+                                            "color: rgb(243, 223, 162);\n"
+                                            "background-color: rgb(3, 37, 108);\n"
+                                            "}\n"
+                                            "#botaoSair:hover\n"
+                                            "{\n"
+                                            "font: 14pt \"Bitstream Vera Sans\";\n"
+                                            "border-radius:9px;\n"
+                                            "background-color: #6E8898;\n"
+                                            "}\n"
+                                            "\n"
+                                            "#botaoRegistrar\n"
+                                            "{\n"
+                                            "font: 14pt \"Bitstream Vera Sans\";\n"
+                                            "border-radius:9px;\n"
+                                            "color: rgb(3, 37, 108);\n"
+                                            "background-color: #9FB1BC;\n"
+                                            "}\n"
+                                            "#botaoRegistrar:hover\n"
+                                            "{\n"
+                                            "font: 14pt \"Bitstream Vera Sans\";\n"
+                                            "border-radius:9px;\n"
+                                            "background-color: #6E8898;\n"
+                                            "}\n"
+                                            "\n"
+                                            "\n"
+                                            "#botaoRemover\n"
+                                            "{\n"
+                                            "font: 14pt \"Bitstream Vera Sans\";\n"
+                                            "border-radius:9px;\n"
+                                            "color: rgb(3, 37, 108);\n"
+                                            "background-color: #9FB1BC;\n"
+                                            "}\n"
+                                            "#botaoRemover:hover\n"
+                                            "{\n"
+                                            "font: 14pt \"Bitstream Vera Sans\";\n"
+                                            "border-radius:9px;\n"
+                                            "background-color: #6E8898;\n"
+                                            "}\n"
+                                            "\n"
+                                            "#botaoAlterar\n"
+                                            "{\n"
+                                            "font: 14pt \"Bitstream Vera Sans\";\n"
+                                            "border-radius:9px;\n"
+                                            "color: rgb(3, 37, 108);\n"
+                                            "background-color: #9FB1BC;\n"
+                                            "}\n"
+                                            "#botaoAlterar:hover\n"
+                                            "{\n"
+                                            "font: 14pt \"Bitstream Vera Sans\";\n"
+                                            "border-radius:9px;\n"
+                                            "background-color: #6E8898;\n"
+                                            "}")
+        self.centralwidget = QtWidgets.QWidget(telaGerenciarPassagem)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
@@ -158,59 +183,68 @@ class Ui_telaOpcoesCliente(object):
         self.verticalLayout.addWidget(self.tabelaPassagem)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.botaoInserir = QtWidgets.QPushButton(self.centralwidget)
-        self.botaoInserir.setObjectName("botaoInserir")
-        self.horizontalLayout.addWidget(self.botaoInserir)
+        self.botaoRegistrar = QtWidgets.QPushButton(self.centralwidget)
+        self.botaoRegistrar.setObjectName("botaoRegistrar")
+        self.horizontalLayout.addWidget(self.botaoRegistrar)
+        self.botaoRegistrar.clicked.connect(
+            lambda: self.switchToRegistrar(telaGerenciarPassagem)
+        )
         self.botaoRemover = QtWidgets.QPushButton(self.centralwidget)
         self.botaoRemover.setObjectName("botaoRemover")
         self.horizontalLayout.addWidget(self.botaoRemover)
         self.botaoAlterar = QtWidgets.QPushButton(self.centralwidget)
         self.botaoAlterar.setObjectName("botaoAlterar")
         self.horizontalLayout.addWidget(self.botaoAlterar)
-        self.botaoVoltar = QtWidgets.QPushButton(self.centralwidget)
-        self.botaoVoltar.setObjectName("botaoVoltar")
-        self.horizontalLayout.addWidget(self.botaoVoltar)
+        self.botaoSair = QtWidgets.QPushButton(self.centralwidget)
+        self.botaoSair.setObjectName("botaoSair")
+        self.horizontalLayout.addWidget(self.botaoSair)
+        self.botaoSair.clicked.connect(
+            lambda: self.switchSair(telaGerenciarPassagem)
+        )
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
-        telaOpcoesCliente.setCentralWidget(self.centralwidget)
+        telaGerenciarPassagem.setCentralWidget(self.centralwidget)
 
-        self.retranslateUi(telaOpcoesCliente)
-        QtCore.QMetaObject.connectSlotsByName(telaOpcoesCliente)
+        self.retranslateUi(telaGerenciarPassagem)
+        QtCore.QMetaObject.connectSlotsByName(telaGerenciarPassagem)
 
-    def retranslateUi(self, telaOpcoesCliente):
+    def retranslateUi(self, telaGerenciarPassagem):
         _translate = QtCore.QCoreApplication.translate
-        telaOpcoesCliente.setWindowTitle(
-            _translate("telaOpcoesCliente", "AirSys - Menu"))
+        telaGerenciarPassagem.setWindowTitle(
+            _translate("telaGerenciarPassagem", "AirSys - Menu"))
         item = self.tabelaPassagem.verticalHeaderItem(0)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarPassagem", "New Row"))
         item = self.tabelaPassagem.verticalHeaderItem(1)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarPassagem", "New Row"))
         item = self.tabelaPassagem.verticalHeaderItem(2)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarPassagem", "New Row"))
         item = self.tabelaPassagem.verticalHeaderItem(3)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarPassagem", "New Row"))
         item = self.tabelaPassagem.verticalHeaderItem(4)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarPassagem", "New Row"))
         item = self.tabelaPassagem.verticalHeaderItem(5)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarPassagem", "New Row"))
         item = self.tabelaPassagem.verticalHeaderItem(6)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarPassagem", "New Row"))
         item = self.tabelaPassagem.verticalHeaderItem(7)
-        item.setText(_translate("telaOpcoesCliente", "New Row"))
+        item.setText(_translate("telaGerenciarPassagem", "New Row"))
         item = self.tabelaPassagem.horizontalHeaderItem(0)
-        item.setText(_translate("telaOpcoesCliente", "New Column"))
+        item.setText(_translate("telaGerenciarPassagem", "New Column"))
         item = self.tabelaPassagem.horizontalHeaderItem(1)
-        item.setText(_translate("telaOpcoesCliente", "codigo"))
+        item.setText(_translate("telaGerenciarPassagem", "codigo"))
         item = self.tabelaPassagem.horizontalHeaderItem(2)
-        item.setText(_translate("telaOpcoesCliente", "nome"))
+        item.setText(_translate("telaGerenciarPassagem", "nome"))
         item = self.tabelaPassagem.horizontalHeaderItem(3)
-        item.setText(_translate("telaOpcoesCliente", "cpf"))
+        item.setText(_translate("telaGerenciarPassagem", "cpf"))
         item = self.tabelaPassagem.horizontalHeaderItem(4)
-        item.setText(_translate("telaOpcoesCliente", "numVendas"))
-        self.botaoInserir.setText(_translate("telaOpcoesCliente", "Inserir"))
-        self.botaoRemover.setText(_translate("telaOpcoesCliente", "Remover"))
-        self.botaoAlterar.setText(_translate("telaOpcoesCliente", "Alterar"))
-        self.botaoVoltar.setText(_translate("telaOpcoesCliente", "Sair"))
+        item.setText(_translate("telaGerenciarPassagem", "numVendas"))
+        self.botaoRegistrar.setText(_translate(
+            "telaGerenciarPassagem", "Registrar"))
+        self.botaoRemover.setText(_translate(
+            "telaGerenciarPassagem", "Remover"))
+        self.botaoAlterar.setText(_translate(
+            "telaGerenciarPassagem", "Alterar"))
+        self.botaoSair.setText(_translate("telaGerenciarPassagem", "Sair"))
         self.pList = controles.ListaPassagens()
         self.pData = self.pList.listarPassagens()
         self.numRows = len(self.pData)
@@ -238,13 +272,13 @@ class Ui_telaOpcoesCliente(object):
                 self.tabelaPassagem.setItem(
                     row, column, QTableWidgetItem((data[row][column]))
                 )
-        self.tabelaPassagem.setEditTriggers(QtWidgets.QTableWidget.NoEditTriggers)
+        self.tabelaPassagem.setEditTriggers( QtWidgets.QTableWidget.NoEditTriggers)
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    telaOpcoesCliente = QtWidgets.QMainWindow()
-    ui = Ui_telaOpcoesCliente()
-    ui.setupUi(telaOpcoesCliente)
-    telaOpcoesCliente.show()
+    telaGerenciarPassagem = QtWidgets.QMainWindow()
+    ui = Ui_telaGerenciarPassagem()
+    ui.setupUi(telaGerenciarPassagem)
+    telaGerenciarPassagem.show()
     sys.exit(app.exec_())

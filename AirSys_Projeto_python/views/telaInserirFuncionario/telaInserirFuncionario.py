@@ -11,6 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 sys.path.append("../../")
 import views.recursos.recursos_rc
 
+
 class Ui_telaInserirFuncionario(object):
     def setupUi(self, telaInserirFuncionario):
         telaInserirFuncionario.setObjectName("telaInserirFuncionario")
@@ -129,7 +130,7 @@ class Ui_telaInserirFuncionario(object):
     def retranslateUi(self, telaInserirFuncionario):
         _translate = QtCore.QCoreApplication.translate
         telaInserirFuncionario.setWindowTitle(
-            _translate("telaInserirFuncionario", "MainWindow"))
+            _translate("telaInserirFuncionario", "Inseir Funcionario"))
         self.campoCodigo.setPlaceholderText(
             _translate("telaInserirFuncionario", "CODIGO"))
         self.campoNome.setPlaceholderText(

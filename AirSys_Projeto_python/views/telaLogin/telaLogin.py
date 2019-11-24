@@ -12,11 +12,8 @@ sys.path.append("../../")
 import views.recursos.recursos_rc
 import controles
 
-
-class Ui_Login(QtWidgets.QMainWindow):
-    switch_window = QtCore.pyqtSignal()
-
-    def checarCredenciais(self):
+class Ui_Login():
+    def checarCredenciais(self, ui):
         cod = self.CampoCodigo.text()
         senha = self.CampoSenha.text()
 
@@ -30,20 +27,21 @@ class Ui_Login(QtWidgets.QMainWindow):
             buscaG = gList.buscarGerente(codigo=cod)
 
             if buscaF is not None:
-                print("Pode logar funcionario!")
+                from views.telaMenuFuncionario.telaOpcoesFuncionario import Ui_telaOpcoesFuncionario
+                self.telaOpcoes = QtWidgets.QMainWindow()
+                self.opcoesFuncionario = Ui_telaOpcoesFuncionario()
+                self.opcoesFuncionario.setupUi(self.telaOpcoes)
+                ui.hide()
+                self.telaOpcoes.show()
             elif buscaG is not None:
-                print("Pode logar gerente!")
-                from views.telaMenuGerente.telaMenuGerente import Ui_telaOpcoesGerente
+                from views.telaMenuGerente.telaMenuGerente import Ui_telaOpcoesGerente                
                 self.telaOpcoes = QtWidgets.QMainWindow()
                 self.opcoesGerente = Ui_telaOpcoesGerente()
                 self.opcoesGerente.setupUi(self.telaOpcoes)
+                ui.hide()
                 self.telaOpcoes.show()
             else:
                 print("Usuario ou senha incorretos")
-
-    def changing(self):
-        self.setVisible(False)
-        self.checarCredenciais()
 
     def setupUi(self, Login):
         Login.setObjectName("Login")
@@ -158,7 +156,7 @@ class Ui_Login(QtWidgets.QMainWindow):
         self.CampoSenha.setObjectName("CampoSenha")
         self.BotaoLogar = QtWidgets.QPushButton(self.frame)
         # BOTAO
-        self.BotaoLogar.clicked.connect(self.changing)
+        self.BotaoLogar.clicked.connect(lambda: self.checarCredenciais(Login))
         self.BotaoLogar.setGeometry(QtCore.QRect(140, 370, 121, 41))
         font = QtGui.QFont()
         font.setFamily("Noto Sans CJK TC")

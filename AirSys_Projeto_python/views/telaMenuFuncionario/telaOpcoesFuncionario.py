@@ -11,7 +11,33 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 sys.path.append("../../")
 import views.recursos.recursos_rc
 
-class Ui_telaOpcoesFuncionario(object):
+class Ui_telaOpcoesFuncionario(QtWidgets.QWidget):
+    def switchToClientes(self, ui):
+        from views.telaGerenciarCliente.telaGerenciarCliente import Ui_telaGerenciarCliente
+        self.telaMenu = QtWidgets.QMainWindow()
+        self.menuCliente = Ui_telaGerenciarCliente()
+        self.menuCliente.setupUi(self.telaMenu)
+        self.menuCliente.setTelaAnterior("Funcionario")        
+        ui.hide()
+        self.telaMenu.show()
+
+    def switchToPassagem(self, ui):
+        from views.telaOpcoesPassagem.telaOpcoesPassagem import Ui_telaOpcoesPassagem
+        self.telaMenu = QtWidgets.QMainWindow()
+        self.menuPassagem = Ui_telaOpcoesPassagem()
+        self.menuPassagem.setupUi(self.telaMenu)
+        self.menuPassagem.setTelaAnterior("Funcionario")
+        ui.hide()
+        self.telaMenu.show()
+
+    def switchVoltar(self, ui):
+        from views.telaLogin.telaLogin import Ui_Login
+        tela = QtWidgets.QMainWindow()
+        menuLogin = Ui_Login()
+        menuLogin.setupUi(tela)
+        ui.hide()
+        tela.show()
+
     def setupUi(self, telaOpcoesFuncionario):
         telaOpcoesFuncionario.setObjectName("telaOpcoesFuncionario")
         telaOpcoesFuncionario.resize(381, 505)
@@ -90,12 +116,21 @@ class Ui_telaOpcoesFuncionario(object):
         self.botaoClientes = QtWidgets.QPushButton(self.frame)
         self.botaoClientes.setGeometry(QtCore.QRect(30, 60, 231, 101))
         self.botaoClientes.setObjectName("botaoClientes")
+        self.botaoClientes.clicked.connect(
+            lambda: self.switchToClientes(telaOpcoesFuncionario)
+        )
         self.botaoPassagens = QtWidgets.QPushButton(self.frame)
+        self.botaoPassagens.clicked.connect(
+            lambda: self.switchToPassagem(telaOpcoesFuncionario)
+        )
         self.botaoPassagens.setGeometry(QtCore.QRect(30, 230, 231, 101))
         self.botaoPassagens.setObjectName("botaoPassagens")
         self.botaoVoltar = QtWidgets.QPushButton(self.frame)
         self.botaoVoltar.setGeometry(QtCore.QRect(30, 410, 231, 25))
         self.botaoVoltar.setObjectName("botaoVoltar")
+        self.botaoVoltar.clicked.connect(
+            lambda: self.switchVoltar(telaOpcoesFuncionario)
+        )
         telaOpcoesFuncionario.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(telaOpcoesFuncionario)
