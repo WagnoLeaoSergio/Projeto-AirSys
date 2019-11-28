@@ -168,6 +168,7 @@ class InterfaceListaEntidade:
                 bibliotec["numIdentidade"] = entidade.setNumIdetidade
                 bibliotec["cpf"] = entidade.setCPF
                 bibliotec["email"] = entidade.setEmail
+                bibliotec["senha"] = entidade.setSenha
                 bibliotec["numeroDeVendas"] = entidade.setNumDeVendas
             elif nomeEntidade == "Cliente":
                 bibliotec["nome"] = entidade.setNome

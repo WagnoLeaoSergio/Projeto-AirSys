@@ -1,0 +1,11 @@
+Credenciais de gerente:
+
+Código: G0002
+Senha: 0
+
+Credenciais de funcionário:
+
+Código: F0003
+Senha 1
+
+Para iniciar o programa, execute o arquivo AirSys.exe

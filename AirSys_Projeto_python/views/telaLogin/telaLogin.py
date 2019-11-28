@@ -12,13 +12,18 @@ sys.path.append("../../")
 import views.recursos.recursos_rc
 import controles
 
-class Ui_Login():
+class Ui_Login:
     def checarCredenciais(self, ui):
         cod = self.CampoCodigo.text()
         senha = self.CampoSenha.text()
 
         if cod == "" or senha == "":
-            print("Digite codigo e senha validos")
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setText("Digite codigo e senha validos")
+            msgBox.exec_()
+            return
+            # print("Digite codigo e senha validos")
         else:
             fList = controles.ListaFuncionarios()
             gList = controles.ListaGerentes()
@@ -41,7 +46,11 @@ class Ui_Login():
                 ui.hide()
                 self.telaOpcoes.show()
             else:
-                print("Usuario ou senha incorretos")
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.setWindowTitle("Aviso")
+                msgBox.setText("Usuario ou senha incorretos")
+                msgBox.exec_()
+                # print("Usuario ou senha incorretos")
 
     def setupUi(self, Login):
         Login.setObjectName("Login")
@@ -199,7 +208,7 @@ class Ui_Login():
         self.label_codigo.setText(_translate("Login", "Codigo"))
         self.label_senha.setText(_translate("Login", "Senha"))
 
-
+"""
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     Login = QtWidgets.QMainWindow()
@@ -207,3 +216,4 @@ if __name__ == "__main__":
     ui.setupUi(Login)
     Login.show()
     sys.exit(app.exec_())
+"""

@@ -1,14 +1,12 @@
-import controles
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
+from views.telaLogin.telaLogin import Ui_Login
 
-z = controles.Passagem()
 
-lz = controles.ListaPassagens()
-
-z.setCodigo("P0003")
-
-print(lz.registrarPassagem("P0003", z))
-print(lz.buscarPassagem(codigo="P0003").getDestino())
-
-print(lz.listarPassagens())
-
-#print(lz.alterarPassagem(codigo="P0001", campo="destino", valor="Beyond"))
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    Login = QtWidgets.QMainWindow()
+    ui = Ui_Login()
+    ui.setupUi(Login)
+    Login.show()
+    sys.exit(app.exec_())

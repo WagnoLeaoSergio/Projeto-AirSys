@@ -22,11 +22,19 @@ class Ui_telaInserirCliente(object):
         novo_cliente = controles.Cliente()
         cod = self.campoCodigo.text()
         if cod == "":
-            print("Por favor insira um codigo para o cliente")
+            # print("Por favor insira um codigo para o cliente")
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setText("Por favor insira um codigo para o cliente")
+            msgBox.exec_()
             return
         busca = cList.buscarCliente(cod)
         if busca is not None:
-            print("Cliente com codigo ja cadastrado")
+            # print("Cliente com codigo ja cadastrado")
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setWindowTitle("Aviso")
+            msgBox.setText("Cliente com codigo ja cadastrado")
+            msgBox.exec_()
             return
 
         nome = self.campoNome.text()

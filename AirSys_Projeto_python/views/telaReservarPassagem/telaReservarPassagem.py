@@ -25,7 +25,11 @@ class Ui_telaReservaPassagem(object):
             campo="estado",
             valor="reservada"
         )
-        print("Passagem {0} reservada!".format(self.codPassagem))
+        # print("Passagem {0} reservada!".format(self.codPassagem))
+        msgBox = QtWidgets.QMessageBox()
+        msgBox.setWindowTitle("Aviso")
+        msgBox.setText("Passagem {0} reservada!".format(self.codPassagem))
+        msgBox.exec_()
 
     def setupUi(self, telaReservaPassagem):
         telaReservaPassagem.setObjectName("telaReservaPassagem")

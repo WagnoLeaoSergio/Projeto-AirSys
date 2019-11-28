@@ -25,7 +25,11 @@ class Ui_telaVendaPassagem(object):
             campo="estado",
             valor="comprada"
         )
-        print("Passagem {0} vendida!".format(self.codPassagem))
+        msgBox = QtWidgets.QMessageBox()
+        msgBox.setWindowTitle("Aviso")
+        msgBox.setText("Passagem {0} vendida!".format(self.codPassagem))
+        msgBox.exec_()
+        # print("Passagem {0} vendida!".format(self.codPassagem))
 
     def setupUi(self, telaVendaPassagem):
         telaVendaPassagem.setObjectName("telaVendaPassagem")
